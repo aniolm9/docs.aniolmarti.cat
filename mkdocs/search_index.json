@@ -1,6 +1,11 @@
 {
     "docs": [
         {
+            "location": "/",
+            "text": "Index",
+            "title": "Home"
+        },
+        {
             "location": "/hello/",
             "text": "Hello World",
             "title": "Hello"
