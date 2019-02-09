@@ -3,5 +3,5 @@ site_description: Some useful documentation.
 site_author: Aniol Marti
 repo_url: https://github.com/aniolm9/docs.aniolmarti.cat
 remote_branch: master
-
 copyright: Copyright &copy; 2019 <a href="https://twitter.com/Aniol99">Aniol Marti</a>.
+docs_dir: ../docs-files/docs
