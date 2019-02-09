@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome\n\n\nIn this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.\n\n\nWhat can I find?\n\n\nMostly operating systems related documentation and some other tech and geek stuff.\n\n\nWhat should I do if I see an error?\n\n\nYou can e-mail me at aniol@aniolmarti.cat and I'll fix it.\n\n\nOther sites\n\n\nMy blog: https://blog.aniolmarti.cat\nMy personal site: https://www.aniolmarti.cat",
+            "text": "Welcome\n\n\nIn this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.\n\n\nWhat can I find?\n\n\nMostly operating systems related documentation and some other tech and geek stuff.\n\n\nWhat should I do if I see an error?\n\n\nYou can e-mail me at aniol@aniolmarti.cat and I'll fix it.\n\n\nOther sites\n\n\nMy blog: \nhttps://blog.aniolmarti.cat\n\nMy personal site: \nhttps://www.aniolmarti.cat",
             "title": "Home"
         },
         {
@@ -22,7 +22,7 @@
         },
         {
             "location": "/#other-sites",
-            "text": "My blog: https://blog.aniolmarti.cat\nMy personal site: https://www.aniolmarti.cat",
+            "text": "My blog:  https://blog.aniolmarti.cat \nMy personal site:  https://www.aniolmarti.cat",
             "title": "Other sites"
         },
         {
