@@ -2,13 +2,8 @@
     "docs": [
         {
             "location": "/",
-            "text": "Index",
+            "text": "Hello world",
             "title": "Home"
-        },
-        {
-            "location": "/hello/",
-            "text": "Hello World",
-            "title": "Hello"
         }
     ]
 }
