@@ -1,0 +1,9 @@
+{
+    "docs": [
+        {
+            "location": "/hello/",
+            "text": "Hello World",
+            "title": "Hello"
+        }
+    ]
+}
