@@ -5,7 +5,7 @@ In this site I keep some documentation I gathered over the time. I try to keep e
 Mostly operating systems related documentation and some other tech and geek stuff.
 
 ## What should I do if I see an error?
-You can e-mail me at aniol@aniolmarti.cat and I'll fix it.
+You can e-mail me at <aniol@aniolmarti.cat> and I'll fix it.
 
 ## Other sites
 **My blog:** <https://blog.aniolmarti.cat>  
