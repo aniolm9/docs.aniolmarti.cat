@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome\n\n\nIn this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.\n\n\nWhat can I find?\n\n\nMostly operating systems related documentation and some other tech and geek stuff.\n\n\nWhat should I do if I see an error?\n\n\nYou can e-mail me at aniol@aniolmarti.cat and I'll fix it.\n\n\nOther sites\n\n\nMy blog:\n \nhttps://blog.aniolmarti.cat\n\n\nMy personal site:\n \nhttps://www.aniolmarti.cat",
+            "text": "Welcome\n\n\nIn this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.\n\n\nWhat can I find?\n\n\nMostly operating systems related documentation and some other tech and geek stuff.\n\n\nWhat should I do if I see an error?\n\n\nYou can e-mail me at \naniol@aniolmarti.cat\n and I'll fix it.\n\n\nOther sites\n\n\nMy blog:\n \nhttps://blog.aniolmarti.cat\n\n\nMy personal site:\n \nhttps://www.aniolmarti.cat",
             "title": "Home"
         },
         {
@@ -17,7 +17,7 @@
         },
         {
             "location": "/#what-should-i-do-if-i-see-an-error",
-            "text": "You can e-mail me at aniol@aniolmarti.cat and I'll fix it.",
+            "text": "You can e-mail me at  aniol@aniolmarti.cat  and I'll fix it.",
             "title": "What should I do if I see an error?"
         },
         {
