@@ -2,8 +2,13 @@
     "docs": [
         {
             "location": "/",
-            "text": "Hello world",
+            "text": "Hello\n\n\nHello world",
             "title": "Home"
+        },
+        {
+            "location": "/#hello",
+            "text": "Hello world",
+            "title": "Hello"
         },
         {
             "location": "/license/",
