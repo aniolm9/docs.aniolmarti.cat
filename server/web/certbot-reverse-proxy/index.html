@@ -7,14 +7,14 @@
         
         
         
-        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Unattended upgrades - Aniol Marti Documentation</title>
+	<title>Certbot reverse proxy - Aniol Marti Documentation</title>
 
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href="../..">Aniol Marti Documentation</a>
+            <a class="navbar-brand" href="../../..">Aniol Marti Documentation</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,13 +54,13 @@
                 
                 
                     <li >
-                        <a href="../..">Home</a>
+                        <a href="../../..">Home</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="../../license/">License</a>
+                        <a href="../../../license/">License</a>
                     </li>
                 
                 
@@ -70,8 +70,8 @@
                         <ul class="dropdown-menu">
                         
                             
-<li class="active">
-    <a href="./">Unattended upgrades</a>
+<li >
+    <a href="../../unattended-upgrades/">Unattended upgrades</a>
 </li>
 
                         
@@ -81,8 +81,8 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../web/certbot-reverse-proxy/">Certbot reverse proxy</a>
+<li class="active">
+    <a href="./">Certbot reverse proxy</a>
 </li>
 
         
@@ -105,12 +105,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../license/">
+                        <a rel="next" href="../../unattended-upgrades/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../web/certbot-reverse-proxy/">
+                    <li class="disabled">
+                        <a rel="prev" >
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -135,46 +135,76 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#unattended-upgrades">Unattended Upgrades</a></li>
+        <li class="main active"><a href="#lets-encrypt-on-a-reverse-proxy">Let's Encrypt on a reverse proxy</a></li>
+        
+            <li><a href="#virtualhosts-in-the-same-machine">Virtualhosts in the same machine</a></li>
+        
+            <li><a href="#virtualhosts-in-another-machine">Virtualhosts in another machine</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="unattended-upgrades">Unattended Upgrades</h1>
-<p><strong>unattended-upgrades</strong> is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.</p>
-<p><strong>Install the package:</strong>
-<code># apt install unattended-upgrades</code></p>
-<p><strong>Edit the file <code>/etc/apt/apt.conf.d/20auto-upgrades</code>:</strong></p>
-<pre><code>// Enable the update/upgrade script (0=disable)
-APT::Periodic::Enable &quot;1&quot;;
+<h1 id="lets-encrypt-on-a-reverse-proxy">Let's Encrypt on a reverse proxy</h1>
+<p>Brief notes about the problems found when configuring Let's Encrypt (Certbot) with a reverse proxy and different machines. Renewal files are located in: <code>/etc/letsencrypt/renewal</code></p>
+<h2 id="virtualhosts-in-the-same-machine">Virtualhosts in the same machine</h2>
+<p>Nothing special, just use Certbot webroot renew.</p>
+<p><strong>Configuration example:</strong></p>
+<pre><code># renew_before_expiry = 30 days
+version = 0.10.2
+archive_dir = /etc/letsencrypt/archive/example.com
+cert = /etc/letsencrypt/live/example.com/cert.pem
+privkey = /etc/letsencrypt/live/example.com/privkey.pem
+chain = /etc/letsencrypt/live/example.com/chain.pem
+fullchain = /etc/letsencrypt/live/example.com/fullchain.pem
 
-// Do &quot;apt-get update&quot; automatically every n-days (0=disable)
-APT::Periodic::Update-Package-Lists &quot;1&quot;;
+# Options used in the renewal process
+[renewalparams]
+authenticator = webroot
+installer = None
+account = &lt;ACCOUNT&gt;
 
-// Do &quot;apt-get upgrade --download-only&quot; every n-days (0=disable)
-APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
-
-// Run the &quot;unattended-upgrade&quot; security upgrade script
-// every n-days (0=disabled)
-// Requires the package &quot;unattended-upgrades&quot; and will write
-// a log in /var/log/unattended-upgrades
-APT::Periodic::Unattended-Upgrade &quot;1&quot;;
-
-// Do &quot;apt-get autoclean&quot; every n-days (0=disable)
-APT::Periodic::AutocleanInterval &quot;7&quot;;
+[[webroot_map]]                
+www.example.com = /var/www/example.com
+example.com = /var/www/lanpartyripoll.cat
 </code></pre>
 
-<p><strong>Uncomment some lines in <code>/etc/apt/apt.conf.d/50unattended-upgrades</code>:</strong></p>
-<pre><code>&quot;o=Debian,a=stable&quot;;
-&quot;o=Debian,a=stable-updates&quot;;
-//&quot;o=Debian,a=proposed-updates&quot;;
-&quot;origin=Debian,codename=${distro_codename},label=Debian-Security&quot;;
+<h2 id="virtualhosts-in-another-machine">Virtualhosts in another machine</h2>
+<p>First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is <strong>/var/www/example</strong>. Taking that into account, the renewal file:</p>
+<pre><code># renew_before_expiry = 30 days
+version = 0.10.2
+archive_dir = /etc/letsencrypt/archive/example.com
+cert = /etc/letsencrypt/live/example.com/cert.pem
+privkey = /etc/letsencrypt/live/example.com/privkey.pem
+chain = /etc/letsencrypt/live/example.com/chain.pem
+fullchain = /etc/letsencrypt/live/example.com/fullchain.pem
+
+# Options used in the renewal process
+[renewalparams]
+authenticator = webroot
+installer = None
+account = &lt;ACCOUNT&gt;
+
+[[webroot_map]]
+www.example.com = /var/www/machine
+blog.example.com = /var/www/machine
+example.com = /var/www/machine
+machine.example.com = /var/www/machine
 </code></pre>
 
-<p><strong>Restart the service:</strong></p>
-<p><code># systemctl restart unattended-upgrades</code></p></div>
+<p>Now we have two options:</p>
+<h3 id="option-1">Option 1</h3>
+<p><strong>Add a line in the <code>.htaccess</code> where the web is located:</strong></p>
+<pre><code>Redirect 301 /.well-known http://machine.example.com/.well-known
+</code></pre>
+
+<h3 id="option-2">Option 2 (^^)</h3>
+<p><strong>Modify the nginx site in the reverse proxy server:</strong></p>
+<pre><code> location ^~ /.well-known/acme-challenge/ {
+     root /var/www/machine;
+ }
+</code></pre></div>
             
         </div>
 
@@ -184,12 +214,12 @@ APT::Periodic::AutocleanInterval &quot;7&quot;;
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="../../js/jquery-1.10.2.min.js"></script>
-        <script src="../../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../../js/highlight.pack.js"></script>
-        <script>var base_url = '../..';</script>
-        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-        <script src="../../js/base.js"></script>
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

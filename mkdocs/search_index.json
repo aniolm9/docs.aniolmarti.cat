@@ -79,6 +79,36 @@
             "location": "/server/unattended-upgrades/#unattended-upgrades",
             "text": "unattended-upgrades  is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.  Install the package:  # apt install unattended-upgrades  Edit the file  /etc/apt/apt.conf.d/20auto-upgrades :  // Enable the update/upgrade script (0=disable)\nAPT::Periodic::Enable \"1\";\n\n// Do \"apt-get update\" automatically every n-days (0=disable)\nAPT::Periodic::Update-Package-Lists \"1\";\n\n// Do \"apt-get upgrade --download-only\" every n-days (0=disable)\nAPT::Periodic::Download-Upgradeable-Packages \"1\";\n\n// Run the \"unattended-upgrade\" security upgrade script\n// every n-days (0=disabled)\n// Requires the package \"unattended-upgrades\" and will write\n// a log in /var/log/unattended-upgrades\nAPT::Periodic::Unattended-Upgrade \"1\";\n\n// Do \"apt-get autoclean\" every n-days (0=disable)\nAPT::Periodic::AutocleanInterval \"7\";  Uncomment some lines in  /etc/apt/apt.conf.d/50unattended-upgrades :  \"o=Debian,a=stable\";\n\"o=Debian,a=stable-updates\";\n//\"o=Debian,a=proposed-updates\";\n\"origin=Debian,codename=${distro_codename},label=Debian-Security\";  Restart the service:  # systemctl restart unattended-upgrades",
             "title": "Unattended Upgrades"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/",
+            "text": "Let's Encrypt on a reverse proxy\n\n\nBrief notes about the problems found when configuring Let's Encrypt (Certbot) with a reverse proxy and different machines. Renewal files are located in: \n/etc/letsencrypt/renewal\n\n\nVirtualhosts in the same machine\n\n\nNothing special, just use Certbot webroot renew.\n\n\nConfiguration example:\n\n\n# renew_before_expiry = 30 days\nversion = 0.10.2\narchive_dir = /etc/letsencrypt/archive/example.com\ncert = /etc/letsencrypt/live/example.com/cert.pem\nprivkey = /etc/letsencrypt/live/example.com/privkey.pem\nchain = /etc/letsencrypt/live/example.com/chain.pem\nfullchain = /etc/letsencrypt/live/example.com/fullchain.pem\n\n# Options used in the renewal process\n[renewalparams]\nauthenticator = webroot\ninstaller = None\naccount = <ACCOUNT>\n\n[[webroot_map]]                \nwww.example.com = /var/www/example.com\nexample.com = /var/www/lanpartyripoll.cat\n\n\n\n\nVirtualhosts in another machine\n\n\nFirst we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is \n/var/www/example\n. Taking that into account, the renewal file:\n\n\n# renew_before_expiry = 30 days\nversion = 0.10.2\narchive_dir = /etc/letsencrypt/archive/example.com\ncert = /etc/letsencrypt/live/example.com/cert.pem\nprivkey = /etc/letsencrypt/live/example.com/privkey.pem\nchain = /etc/letsencrypt/live/example.com/chain.pem\nfullchain = /etc/letsencrypt/live/example.com/fullchain.pem\n\n# Options used in the renewal process\n[renewalparams]\nauthenticator = webroot\ninstaller = None\naccount = <ACCOUNT>\n\n[[webroot_map]]\nwww.example.com = /var/www/machine\nblog.example.com = /var/www/machine\nexample.com = /var/www/machine\nmachine.example.com = /var/www/machine\n\n\n\n\nNow we have two options:\n\n\nOption 1\n\n\nAdd a line in the \n.htaccess\n where the web is located:\n\n\nRedirect 301 /.well-known http://machine.example.com/.well-known\n\n\n\n\nOption 2 (^^)\n\n\nModify the nginx site in the reverse proxy server:\n\n\n location ^~ /.well-known/acme-challenge/ {\n     root /var/www/machine;\n }",
+            "title": "Certbot reverse proxy"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/#lets-encrypt-on-a-reverse-proxy",
+            "text": "Brief notes about the problems found when configuring Let's Encrypt (Certbot) with a reverse proxy and different machines. Renewal files are located in:  /etc/letsencrypt/renewal",
+            "title": "Let's Encrypt on a reverse proxy"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/#virtualhosts-in-the-same-machine",
+            "text": "Nothing special, just use Certbot webroot renew.  Configuration example:  # renew_before_expiry = 30 days\nversion = 0.10.2\narchive_dir = /etc/letsencrypt/archive/example.com\ncert = /etc/letsencrypt/live/example.com/cert.pem\nprivkey = /etc/letsencrypt/live/example.com/privkey.pem\nchain = /etc/letsencrypt/live/example.com/chain.pem\nfullchain = /etc/letsencrypt/live/example.com/fullchain.pem\n\n# Options used in the renewal process\n[renewalparams]\nauthenticator = webroot\ninstaller = None\naccount = <ACCOUNT>\n\n[[webroot_map]]                \nwww.example.com = /var/www/example.com\nexample.com = /var/www/lanpartyripoll.cat",
+            "title": "Virtualhosts in the same machine"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/#virtualhosts-in-another-machine",
+            "text": "First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is  /var/www/example . Taking that into account, the renewal file:  # renew_before_expiry = 30 days\nversion = 0.10.2\narchive_dir = /etc/letsencrypt/archive/example.com\ncert = /etc/letsencrypt/live/example.com/cert.pem\nprivkey = /etc/letsencrypt/live/example.com/privkey.pem\nchain = /etc/letsencrypt/live/example.com/chain.pem\nfullchain = /etc/letsencrypt/live/example.com/fullchain.pem\n\n# Options used in the renewal process\n[renewalparams]\nauthenticator = webroot\ninstaller = None\naccount = <ACCOUNT>\n\n[[webroot_map]]\nwww.example.com = /var/www/machine\nblog.example.com = /var/www/machine\nexample.com = /var/www/machine\nmachine.example.com = /var/www/machine  Now we have two options:",
+            "title": "Virtualhosts in another machine"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/#option-1",
+            "text": "Add a line in the  .htaccess  where the web is located:  Redirect 301 /.well-known http://machine.example.com/.well-known",
+            "title": "Option 1"
+        },
+        {
+            "location": "/server/web/certbot-reverse-proxy/#option-2",
+            "text": "Modify the nginx site in the reverse proxy server:   location ^~ /.well-known/acme-challenge/ {\n     root /var/www/machine;\n }",
+            "title": "Option 2 (^^)"
         }
     ]
 }
