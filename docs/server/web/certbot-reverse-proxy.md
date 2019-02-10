@@ -23,7 +23,7 @@ account = <ACCOUNT>
 
 [[webroot_map]]                
 www.example.com = /var/www/example.com
-example.com = /var/www/lanpartyripoll.cat
+example.com = /var/www/example.com
 ```
 ## Virtualhosts in another machine
 First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is **/var/www/example**. Taking that into account, the renewal file:
@@ -59,7 +59,7 @@ Redirect 301 /.well-known http://machine.example.com/.well-known
 ### Option 2 (^^)
 **Modify the nginx site in the reverse proxy server:**
 ```
- location ^~ /.well-known/acme-challenge/ {
-     root /var/www/machine;
- }
+location ^~ /.well-known/acme-challenge/ {
+    root /var/www/machine;
+}
 ```
