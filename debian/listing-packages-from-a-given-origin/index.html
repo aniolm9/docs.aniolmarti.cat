@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>Unattended upgrades - Aniol Marti Docs</title>
+	<title>Listing packages from a given origin - Aniol Marti Docs</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
@@ -65,19 +65,19 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Debian <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../debian/basic-configuration/">Basic configuration</a>
+    <a href="../basic-configuration/">Basic configuration</a>
 </li>
 
                         
                             
-<li >
-    <a href="../../debian/listing-packages-from-a-given-origin/">Listing packages from a given origin</a>
+<li class="active">
+    <a href="./">Listing packages from a given origin</a>
 </li>
 
                         
@@ -116,13 +116,13 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Server <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li class="active">
-    <a href="./">Unattended upgrades</a>
+<li >
+    <a href="../../server/unattended-upgrades/">Unattended upgrades</a>
 </li>
 
                         
@@ -133,7 +133,7 @@
         
             
 <li >
-    <a href="../web/certbot-reverse-proxy/">Certbot reverse proxy</a>
+    <a href="../../server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
 </li>
 
         
@@ -156,12 +156,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../security/GPG/Signing-commits-with-GPG/">
+                        <a rel="next" href="../basic-configuration/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../web/certbot-reverse-proxy/">
+                        <a rel="prev" href="../../security/GPG/Generating-a-GPG-key/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -186,46 +186,18 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#unattended-upgrades">Unattended Upgrades</a></li>
+        <li class="main active"><a href="#listing-packages-from-a-given-origin">Listing packages from a given origin</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="unattended-upgrades">Unattended Upgrades</h1>
-<p><strong>unattended-upgrades</strong> is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.</p>
-<p><strong>Install the package:</strong>
-<code># apt install unattended-upgrades</code></p>
-<p><strong>Edit the file <code>/etc/apt/apt.conf.d/20auto-upgrades</code>:</strong></p>
-<pre><code>// Enable the update/upgrade script (0=disable)
-APT::Periodic::Enable &quot;1&quot;;
-
-// Do &quot;apt-get update&quot; automatically every n-days (0=disable)
-APT::Periodic::Update-Package-Lists &quot;1&quot;;
-
-// Do &quot;apt-get upgrade --download-only&quot; every n-days (0=disable)
-APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
-
-// Run the &quot;unattended-upgrade&quot; security upgrade script
-// every n-days (0=disabled)
-// Requires the package &quot;unattended-upgrades&quot; and will write
-// a log in /var/log/unattended-upgrades
-APT::Periodic::Unattended-Upgrade &quot;1&quot;;
-
-// Do &quot;apt-get autoclean&quot; every n-days (0=disable)
-APT::Periodic::AutocleanInterval &quot;7&quot;;
-</code></pre>
-
-<p><strong>Uncomment some lines in <code>/etc/apt/apt.conf.d/50unattended-upgrades</code>:</strong></p>
-<pre><code>&quot;o=Debian,a=stable&quot;;
-&quot;o=Debian,a=stable-updates&quot;;
-//&quot;o=Debian,a=proposed-updates&quot;;
-&quot;origin=Debian,codename=${distro_codename},label=Debian-Security&quot;;
-</code></pre>
-
-<p><strong>Restart the service:</strong></p>
-<p><code># systemctl restart unattended-upgrades</code></p></div>
+<h1 id="listing-packages-from-a-given-origin">Listing packages from a given origin</h1>
+<p>Just run:</p>
+<pre><code>ORIGIN=deb-multimedia # For example
+dpkg -l | awk '/^.i/ {print $2}' | xargs apt-cache policy | awk '/^[a-z0-9.-]+:/ {pkg=$1}; /***/ {OFS=&quot;\t&quot;; ver=$2; getline; print pkg,ver,$2,$3}'|grep -v /var/lib/dpkg/status| sed -e 's/://'|awk '{printf &quot;%-40s %-36s %-36s %-16s \n&quot;,$1,$2,$3, $4}' | grep -i $ORIGIN | cut -d&quot; &quot; -f1
+</code></pre></div>
             
         </div>
 
