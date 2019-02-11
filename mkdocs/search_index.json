@@ -127,8 +127,53 @@
         },
         {
             "location": "/security/GPG/Generating-a-GPG-key/",
-            "text": "Foo bar",
+            "text": "Generating a GPG key\n\n\nInstall GnuPG\n\n\nsudo apt install gnupg dirmngr\n\n\n\n\nIncrease security\n\n\nEdit the file \n~/.gnupg/gpg.conf\n:\n\n\nrequire-cross-certification\nkeyserver hkp://keys.gnupg.net\n\n# 32 bit IDs are too weak and have collisions\nkeyid-format long\n\npersonal-digest-preferences SHA512\ncert-digest-algo SHA512\ndefault-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed\nno-emit-version \nno-comments \npersonal-cipher-preferences AES AES256 AES192 CAST5\nignore-time-conflict \nallow-freeform-uid \n\n\n\n\nGenerate a key\n\n\nGenerate the key:\n\n\ngpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.\n\n\n\n\nGenerate the revoking certificate:\n\n\ngpg --gen-revoke <KEY_ID> > ~/.gnupg/revoke-<KEY_ID>.crt\n\n\n\n\nMake our key public:\n\n\ngpg --send-key <KEY_ID>\n\n\n\n\nSigning and encrypting\n\n\nSign:\n\n\ngpg -[a]s <FILE>\n\n\n\n\n\n\n-a \u2192 Armor: The output is in ASCII.\n\n\n-s \u2192 Sign: Signs the given text (ends with Ctrl-D) or a file.\n\n\n\n\nEncrypt:\n\n\ngpg -[a]e -r <ANOTHER_ID> <FILE>\n\n\n\n\n\n\n-e \u2192 Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.\n\n\n-r \u2192 Recipient: The ID of the person who will receive the encrypted message.\n\n\n\n\nSubkeys\n\n\nGenerating the subkeys\n\n\nBackup the ~/.gnupg directory:\n\n\numask 077 && tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg\n\n\n\n\nEdit our key:\n\n\ngpg --edit-key <KEY_ID>\n\n\n\n\nAdd the subkey:\n\n\ngpg> addkey\ngpg> save\n\n\n\n\nCopying the subkeys\n\n\nMake a copy of the keyring:\n\n\ntar cvzf ~/gpg-backup-post.tgz ~/.gnupg\n\n\n\n\nCopy \ngpg-backup-post.tgz\n to an encrypted USB device.\n\n\nDelete both local backups:\n\n\nshred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz\n\n\n\n\nImporting the subkeys\n\n\nThe following commands are run in the laptop.\n\n\n```bash\ncp /media/encrypted-usb ~/gpg-backup-post.tgz\ngpg --export-secret-subkeys \n > /media/encrypted-usb/subkeys\ngpg --delete-secret-key \n\ngpg --import /media/encrypted-usb/subkeys\nshred -u /media/encrypted-usb/subkeys\n````\n\n\nWe keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.",
             "title": "Generating a GPG key"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#generating-a-gpg-key",
+            "text": "",
+            "title": "Generating a GPG key"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#install-gnupg",
+            "text": "sudo apt install gnupg dirmngr",
+            "title": "Install GnuPG"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#increase-security",
+            "text": "Edit the file  ~/.gnupg/gpg.conf :  require-cross-certification\nkeyserver hkp://keys.gnupg.net\n\n# 32 bit IDs are too weak and have collisions\nkeyid-format long\n\npersonal-digest-preferences SHA512\ncert-digest-algo SHA512\ndefault-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed\nno-emit-version \nno-comments \npersonal-cipher-preferences AES AES256 AES192 CAST5\nignore-time-conflict \nallow-freeform-uid",
+            "title": "Increase security"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#generate-a-key",
+            "text": "Generate the key:  gpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.  Generate the revoking certificate:  gpg --gen-revoke <KEY_ID> > ~/.gnupg/revoke-<KEY_ID>.crt  Make our key public:  gpg --send-key <KEY_ID>",
+            "title": "Generate a key"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#signing-and-encrypting",
+            "text": "Sign:  gpg -[a]s <FILE>   -a \u2192 Armor: The output is in ASCII.  -s \u2192 Sign: Signs the given text (ends with Ctrl-D) or a file.   Encrypt:  gpg -[a]e -r <ANOTHER_ID> <FILE>   -e \u2192 Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.  -r \u2192 Recipient: The ID of the person who will receive the encrypted message.",
+            "title": "Signing and encrypting"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#subkeys",
+            "text": "",
+            "title": "Subkeys"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#generating-the-subkeys",
+            "text": "Backup the ~/.gnupg directory:  umask 077 && tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg  Edit our key:  gpg --edit-key <KEY_ID>  Add the subkey:  gpg> addkey\ngpg> save",
+            "title": "Generating the subkeys"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#copying-the-subkeys",
+            "text": "Make a copy of the keyring:  tar cvzf ~/gpg-backup-post.tgz ~/.gnupg  Copy  gpg-backup-post.tgz  to an encrypted USB device.  Delete both local backups:  shred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz",
+            "title": "Copying the subkeys"
+        },
+        {
+            "location": "/security/GPG/Generating-a-GPG-key/#importing-the-subkeys",
+            "text": "The following commands are run in the laptop.  ```bash\ncp /media/encrypted-usb ~/gpg-backup-post.tgz\ngpg --export-secret-subkeys   > /media/encrypted-usb/subkeys\ngpg --delete-secret-key  \ngpg --import /media/encrypted-usb/subkeys\nshred -u /media/encrypted-usb/subkeys\n````  We keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.",
+            "title": "Importing the subkeys"
         },
         {
             "location": "/security/GPG/Signing-commits-with-GPG/",
