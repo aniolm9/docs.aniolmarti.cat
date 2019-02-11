@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Some useful documentation.">
+        
         <meta name="author" content="Aniol Marti">
         
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Aniol Marti Docs</title>
+	<title>signing commits with GPG - Aniol Marti Docs</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.5.0.css" rel="stylesheet">
-        <link href="./css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -25,7 +25,7 @@
         
     </head>
 
-    <body class="homepage">
+    <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">Aniol Marti Docs</a>
+            <a class="navbar-brand" href="../../..">Aniol Marti Docs</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -53,14 +53,14 @@
                 <ul class="nav navbar-nav">
                 
                 
-                    <li class="active">
-                        <a href=".">Home</a>
+                    <li >
+                        <a href="../../..">Home</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="license/">License</a>
+                        <a href="../../../license/">License</a>
                     </li>
                 
                 
@@ -71,7 +71,7 @@
                         
                             
 <li >
-    <a href="debian/basic-configuration/">Basic configuration</a>
+    <a href="../../../debian/basic-configuration/">Basic configuration</a>
 </li>
 
                         
@@ -80,7 +80,7 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Security <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -90,8 +90,8 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="security/GPG/signing-commits-with-GPG/">signing commits with GPG</a>
+<li class="active">
+    <a href="./">signing commits with GPG</a>
 </li>
 
         
@@ -110,7 +110,7 @@
                         
                             
 <li >
-    <a href="server/unattended-upgrades/">Unattended upgrades</a>
+    <a href="../../../server/unattended-upgrades/">Unattended upgrades</a>
 </li>
 
                         
@@ -121,7 +121,7 @@
         
             
 <li >
-    <a href="server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
+    <a href="../../../server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
 </li>
 
         
@@ -143,13 +143,13 @@
                     </a>
                 </li>
                 
-                    <li class="disabled">
-                        <a rel="next" >
+                    <li >
+                        <a rel="next" href="../../../debian/basic-configuration/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="license/">
+                        <a rel="prev" href="../../../server/unattended-upgrades/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -174,28 +174,23 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#welcome">Welcome</a></li>
-        
-            <li><a href="#what-can-i-find">What can I find?</a></li>
-        
-            <li><a href="#what-should-i-do-if-i-see-an-error">What should I do if I see an error?</a></li>
-        
-            <li><a href="#other-sites">Other sites</a></li>
+        <li class="main active"><a href="#signing-commits-with-gpg">Signing commits with GPG</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="welcome">Welcome</h1>
-<p>In this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.</p>
-<h2 id="what-can-i-find">What can I find?</h2>
-<p>Mostly operating systems related documentation and some other tech and geek stuff.</p>
-<h2 id="what-should-i-do-if-i-see-an-error">What should I do if I see an error?</h2>
-<p>You can e-mail me at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#105;&#111;&#108;&#64;&#97;&#110;&#105;&#111;&#108;&#109;&#97;&#114;&#116;&#105;&#46;&#99;&#97;&#116;">&#97;&#110;&#105;&#111;&#108;&#64;&#97;&#110;&#105;&#111;&#108;&#109;&#97;&#114;&#116;&#105;&#46;&#99;&#97;&#116;</a> and I'll fix it.</p>
-<h2 id="other-sites">Other sites</h2>
-<p><strong>My blog:</strong> <a href="https://blog.aniolmarti.cat">https://blog.aniolmarti.cat</a><br />
-<strong>My personal site:</strong> <a href="https://www.aniolmarti.cat">https://www.aniolmarti.cat</a></p></div>
+<h1 id="signing-commits-with-gpg">Signing commits with GPG</h1>
+<p>You just need a GPG key (see <a href="generating-a-GPG-key.md">Generating a GPG key</a>).</p>
+<pre><code>git config --global gpg.program gpg2 # Set the binary to use
+git config --global user.signingkey IDCLAU # Set the user GPG key ID
+git config --global commit.gpgsign true # Always sign the commits
+</code></pre>
+
+<p>In order to manually sign a commit:</p>
+<pre><code>git commit -S -m &quot;Commit message&quot;
+</code></pre></div>
             
         </div>
 
@@ -207,12 +202,12 @@
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script>var base_url = '.';</script>
-        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">
@@ -241,8 +236,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 0.15.3
-Build Date UTC : 2019-02-11 09:59:00
--->

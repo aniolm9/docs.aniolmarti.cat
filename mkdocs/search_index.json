@@ -116,6 +116,16 @@
             "title": "Installing Java"
         },
         {
+            "location": "/security/GPG/signing-commits-with-GPG/",
+            "text": "Signing commits with GPG\n\n\nYou just need a GPG key (see \nGenerating a GPG key\n).\n\n\ngit config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits\n\n\n\n\nIn order to manually sign a commit:\n\n\ngit commit -S -m \"Commit message\"",
+            "title": "signing commits with GPG"
+        },
+        {
+            "location": "/security/GPG/signing-commits-with-GPG/#signing-commits-with-gpg",
+            "text": "You just need a GPG key (see  Generating a GPG key ).  git config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits  In order to manually sign a commit:  git commit -S -m \"Commit message\"",
+            "title": "Signing commits with GPG"
+        },
+        {
             "location": "/server/unattended-upgrades/",
             "text": "Unattended Upgrades\n\n\nunattended-upgrades\n is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.\n\n\nInstall the package:\n\n\n# apt install unattended-upgrades\n\n\nEdit the file \n/etc/apt/apt.conf.d/20auto-upgrades\n:\n\n\n// Enable the update/upgrade script (0=disable)\nAPT::Periodic::Enable \"1\";\n\n// Do \"apt-get update\" automatically every n-days (0=disable)\nAPT::Periodic::Update-Package-Lists \"1\";\n\n// Do \"apt-get upgrade --download-only\" every n-days (0=disable)\nAPT::Periodic::Download-Upgradeable-Packages \"1\";\n\n// Run the \"unattended-upgrade\" security upgrade script\n// every n-days (0=disabled)\n// Requires the package \"unattended-upgrades\" and will write\n// a log in /var/log/unattended-upgrades\nAPT::Periodic::Unattended-Upgrade \"1\";\n\n// Do \"apt-get autoclean\" every n-days (0=disable)\nAPT::Periodic::AutocleanInterval \"7\";\n\n\n\n\nUncomment some lines in \n/etc/apt/apt.conf.d/50unattended-upgrades\n:\n\n\n\"o=Debian,a=stable\";\n\"o=Debian,a=stable-updates\";\n//\"o=Debian,a=proposed-updates\";\n\"origin=Debian,codename=${distro_codename},label=Debian-Security\";\n\n\n\n\nRestart the service:\n\n\n# systemctl restart unattended-upgrades",
             "title": "Unattended upgrades"
