@@ -3,11 +3,13 @@
 **unattended-upgrades** is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.
 
 **Install the package:**
-`# apt install unattended-upgrades`
+```bash
+sudo apt install unattended-upgrades
+```
 
 **Edit the file `/etc/apt/apt.conf.d/20auto-upgrades`:**
 
-```
+```text
 // Enable the update/upgrade script (0=disable)
 APT::Periodic::Enable "1";
 
@@ -29,7 +31,7 @@ APT::Periodic::AutocleanInterval "7";
 
 **Uncomment some lines in `/etc/apt/apt.conf.d/50unattended-upgrades`:**
 
-```
+```text
 "o=Debian,a=stable";
 "o=Debian,a=stable-updates";
 //"o=Debian,a=proposed-updates";
@@ -38,4 +40,6 @@ APT::Periodic::AutocleanInterval "7";
 
 **Restart the service:**
 
-`# systemctl restart unattended-upgrades`
+```bash
+sudo systemctl restart unattended-upgrades
+```

@@ -6,9 +6,9 @@ Brief notes about the problems found when configuring Let's Encrypt (Certbot) wi
 Nothing special, just use Certbot webroot renew.
 
 **Configuration example:**
-```
+```text
 # renew_before_expiry = 30 days
-version = 0.10.2
+version = <VERSION>
 archive_dir = /etc/letsencrypt/archive/example.com
 cert = /etc/letsencrypt/live/example.com/cert.pem
 privkey = /etc/letsencrypt/live/example.com/privkey.pem
@@ -28,16 +28,16 @@ example.com = /var/www/example.com
 
 ### Generating certs
 **In the host machine:**
-```
-$ sudo certbot certonly -w /var/www/example.com/ -d example.com -d www.example.com
+```bash
+sudo certbot certonly -w /var/www/example.com/ -d example.com -d www.example.com
 ```
 Actually, this order will create the renewal file.
 
 ## Virtualhosts in another machine
 First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is **/var/www/example**. Taking that into account, the renewal file:
-```
+```text
 # renew_before_expiry = 30 days
-version = 0.10.2
+version = <VERSION>
 archive_dir = /etc/letsencrypt/archive/example.com
 cert = /etc/letsencrypt/live/example.com/cert.pem
 privkey = /etc/letsencrypt/live/example.com/privkey.pem
@@ -60,13 +60,13 @@ machine.example.com = /var/www/machine
 Now we have two options:
 ### Option 1
 **Add a line in the `.htaccess` where the web is located:**
-```
+```text
 Redirect 301 /.well-known http://machine.example.com/.well-known
 ```
 
 ### Option 2 (^^)
 **Modify the nginx site in the reverse proxy server:**
-```
+```text
 location ^~ /.well-known/acme-challenge/ {
     root /var/www/machine;
 }
@@ -74,7 +74,7 @@ location ^~ /.well-known/acme-challenge/ {
 
 ### Generating certs
 **In the host machine:**
-```
-$ sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com
+```bash
+sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com
 ```
 Actually, this order will create the renewal file.

@@ -4,32 +4,32 @@ Obviously, using non-free and contrib repos and installing Java and the kernel f
 ## Sudo
 **Install the package:**
 
-```
-$ su
-# apt install sudo
+```bash
+su
+apt install sudo
 ```
 
 **Add a user:**
 
-```
-# adduser <user> sudo
+```bash
+adduser <user> sudo
 ```
 
 ## Repositories
 
 **Install vim:**
 
-```
-$ sudo apt install vim
+```bash
+sudo apt install vim
 ```
 
-```
-$ sudo vim /etc/apt/sources.list
+```bash
+sudo vim /etc/apt/sources.list
 ```
 
 **Delete everything and add:**
 
-```
+```text
 ## Official
 deb http://ftp.caliu.cat/debian/ stretch main contrib non-free
 deb-src http://ftp.caliu.cat/debian/ stretch main contrib non-free
@@ -48,47 +48,47 @@ I'm using Caliu.cat repos as they are the nearest to my location.
 
 **Update:**
 
-```
-$ sudo apt update
+```bash
+sudo apt update
 ```
 
 **Install build-essentials and git:**
 
-```
-$ sudo apt install linux-headers-$(uname -r) build-essential checkinstall make automake cmake autoconf git git-core
+```bash
+sudo apt install linux-headers-$(uname -r) build-essential checkinstall make automake cmake autoconf git git-core
 ```
 
 **Compressor:**
 
-```
-$ sudo apt install rar unrar p7zip-full p7zip-rar
+```bash
+sudo apt install rar unrar p7zip-full p7zip-rar
 ```
 
 **Update and upgrade:**
 
-```
-$ sudo apt update
-$ sudo apt upgrade
+```bash
+sudo apt update
+sudo apt upgrade
 ```
 
 ## Installing the kernel from backports
 
 **Check for new versions:**
 
-```
-$ sudo apt-cache search linux-image
+```bash
+sudo apt-cache search linux-image
 ```
 
 **Install the kernel:**
 
-```
-$ sudo apt -t stretch-backports install <linux-image>
+```bash
+sudo apt -t stretch-backports install <linux-image>
 ```
 
 ## Installing Java
 **Add the repos:**
 
-```
+```bash
 echo "## Java" >> /etc/apt/sources.list.d/java
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/java
 echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/java
@@ -96,18 +96,18 @@ echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /
 
 **Install the key:**
 
-```
-$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+```bash
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 ```
 
 **Update:**
 
-```
-$ sudo apt update
+```bash
+sudo apt update
 ```
 
 **Install Java:**
 
-```
-$ sudo apt install oracle-java8-installer
+```bash
+sudo apt install oracle-java8-installer
 ```
