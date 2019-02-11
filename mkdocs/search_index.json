@@ -192,8 +192,23 @@
         },
         {
             "location": "/multimedia/spliting-a-.flac-using-a-.cue/",
+            "text": "Spliting a .flac using a .cue\n\n\nInstall the packages\n\n\nsudo apt install cuetools shntool flac\n\n\n\n\nSplit the file\n\n\nshnsplit -f file.cue -t %n-%t -o flac file.flac",
+            "title": "Spliting a .flac using a .cue"
+        },
+        {
+            "location": "/multimedia/spliting-a-.flac-using-a-.cue/#spliting-a-flac-using-a-cue",
             "text": "",
             "title": "Spliting a .flac using a .cue"
+        },
+        {
+            "location": "/multimedia/spliting-a-.flac-using-a-.cue/#install-the-packages",
+            "text": "sudo apt install cuetools shntool flac",
+            "title": "Install the packages"
+        },
+        {
+            "location": "/multimedia/spliting-a-.flac-using-a-.cue/#split-the-file",
+            "text": "shnsplit -f file.cue -t %n-%t -o flac file.flac",
+            "title": "Split the file"
         },
         {
             "location": "/security/GPG/Generating-a-GPG-key/",

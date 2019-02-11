@@ -213,11 +213,25 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#spliting-a-flac-using-a-cue">Spliting a .flac using a .cue</a></li>
+        
+            <li><a href="#install-the-packages">Install the packages</a></li>
+        
+            <li><a href="#split-the-file">Split the file</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-</div>
+<h1 id="spliting-a-flac-using-a-cue">Spliting a .flac using a .cue</h1>
+<h2 id="install-the-packages">Install the packages</h2>
+<pre><code class="bash">sudo apt install cuetools shntool flac
+</code></pre>
+
+<h2 id="split-the-file">Split the file</h2>
+<pre><code class="bash">shnsplit -f file.cue -t %n-%t -o flac file.flac
+</code></pre></div>
             
         </div>
 
