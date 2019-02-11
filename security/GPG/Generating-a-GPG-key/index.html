@@ -283,13 +283,13 @@ gpg&gt; save
 
 <h3 id="importing-the-subkeys">Importing the subkeys</h3>
 <p>The following commands are run in the laptop.</p>
-<p>```bash
-cp /media/encrypted-usb ~/gpg-backup-post.tgz
-gpg --export-secret-subkeys <KEY_ID> &gt; /media/encrypted-usb/subkeys
-gpg --delete-secret-key <KEY_ID>
+<pre><code class="bash">cp /media/encrypted-usb ~/gpg-backup-post.tgz
+gpg --export-secret-subkeys &lt;KEY_ID&gt; &gt; /media/encrypted-usb/subkeys
+gpg --delete-secret-key &lt;KEY_ID&gt;
 gpg --import /media/encrypted-usb/subkeys
 shred -u /media/encrypted-usb/subkeys
-````</p>
+</code></pre>
+
 <p>We keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.</p></div>
             
         </div>
