@@ -92,7 +92,7 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB
 ```
 
 ### Sign a key
-Just run:
+From now on, when you need to sign a key just run:
 ```bash
 caff <ANOTHER_ID>
 ```
