@@ -146,6 +146,56 @@
             "title": "Listing packages from a given origin"
         },
         {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/",
+            "text": "Useful FFmpeg and mkvmerge commands\n\n\nBurning subtitles\n\n\nThe output file could be in another format.\n\n\nSRT format\n\n\nIn a .srt file:\n\n\nffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi\n\n\n\n\nFrom a video:\n\n\nffmpeg -i video.mkv -vf subtitles=video.mkv out.avi\n\n\n\n\nASS format\n\n\nffmpeg -i video.avi -vf \"ass=subtitle.ass\" out.avi\n\n\n\n\nExtracting audio tracks\n\n\nThe output file could be in another format.\n\n\nExtract the first track:\n\n\nffmpeg -i input.avi -codec copy -map 0:a:0 -metadata TITLE=\"title\" out.mp3\n\n\n\n\nConverting video to MKV\n\n\nThe input file could be in another format.\n\n\nffmpeg -i input_video.avi -f matroska -vcodec libx264 -acodec aac output_video.mkv\n\n\n\n\nChanging audio speed\n\n\nThe input and output files could be in another format.\n\nIncrease from the speed at 23.976fps to 25fps:\n\n\nffmpeg -i test.mkv -filter:a \"atempo=1.0427083333333333\" -vn output.aac\n\n\n\n\nChanging video framerate\n\n\nmkvmerge -o out.mkv -A -S --default-duration '0:25fps' --fix-bitstream-timing-information 0 input.mkv",
+            "title": "Useful FFmpeg and mkvmerge commands"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#useful-ffmpeg-and-mkvmerge-commands",
+            "text": "",
+            "title": "Useful FFmpeg and mkvmerge commands"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#burning-subtitles",
+            "text": "The output file could be in another format.",
+            "title": "Burning subtitles"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#srt-format",
+            "text": "In a .srt file:  ffmpeg -i video.avi -vf subtitles=subtitle.srt out.avi  From a video:  ffmpeg -i video.mkv -vf subtitles=video.mkv out.avi",
+            "title": "SRT format"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#ass-format",
+            "text": "ffmpeg -i video.avi -vf \"ass=subtitle.ass\" out.avi",
+            "title": "ASS format"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#extracting-audio-tracks",
+            "text": "The output file could be in another format.  Extract the first track:  ffmpeg -i input.avi -codec copy -map 0:a:0 -metadata TITLE=\"title\" out.mp3",
+            "title": "Extracting audio tracks"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#converting-video-to-mkv",
+            "text": "The input file could be in another format.  ffmpeg -i input_video.avi -f matroska -vcodec libx264 -acodec aac output_video.mkv",
+            "title": "Converting video to MKV"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#changing-audio-speed",
+            "text": "The input and output files could be in another format. Increase from the speed at 23.976fps to 25fps:  ffmpeg -i test.mkv -filter:a \"atempo=1.0427083333333333\" -vn output.aac",
+            "title": "Changing audio speed"
+        },
+        {
+            "location": "/multimedia/Useful-FFmpeg-and-mkvmerge-commands/#changing-video-framerate",
+            "text": "mkvmerge -o out.mkv -A -S --default-duration '0:25fps' --fix-bitstream-timing-information 0 input.mkv",
+            "title": "Changing video framerate"
+        },
+        {
+            "location": "/multimedia/spliting-a-.flac-using-a-.cue/",
+            "text": "",
+            "title": "Spliting a .flac using a .cue"
+        },
+        {
             "location": "/security/GPG/Generating-a-GPG-key/",
             "text": "Generating a GPG key\n\n\nInstall GnuPG\n\n\nsudo apt install gnupg dirmngr\n\n\n\n\nIncrease security\n\n\nEdit the file \n~/.gnupg/gpg.conf\n:\n\n\nrequire-cross-certification\nkeyserver hkp://keys.gnupg.net\n\n# 32 bit IDs are too weak and have collisions\nkeyid-format long\n\npersonal-digest-preferences SHA512\ncert-digest-algo SHA512\ndefault-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed\nno-emit-version \nno-comments \npersonal-cipher-preferences AES AES256 AES192 CAST5\nignore-time-conflict \nallow-freeform-uid \n\n\n\n\nGenerate a key\n\n\nGenerate the key:\n\n\ngpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.\n\n\n\n\nGenerate the revoking certificate:\n\n\ngpg --gen-revoke <KEY_ID> > ~/.gnupg/revoke-<KEY_ID>.crt\n\n\n\n\nMake our key public:\n\n\ngpg --send-key <KEY_ID>\n\n\n\n\nSigning and encrypting\n\n\nSign:\n\n\ngpg -[a]s <FILE>\n\n\n\n\n\n\n-a \u2192 Armor: The output is in ASCII.\n\n\n-s \u2192 Sign: Signs the given text (ends with Ctrl-D) or a file.\n\n\n\n\nEncrypt:\n\n\ngpg -[a]e -r <ANOTHER_ID> <FILE>\n\n\n\n\n\n\n-e \u2192 Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.\n\n\n-r \u2192 Recipient: The ID of the person who will receive the encrypted message.\n\n\n\n\nSubkeys\n\n\nGenerating the subkeys\n\n\nBackup the ~/.gnupg directory:\n\n\numask 077 && tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg\n\n\n\n\nEdit our key:\n\n\ngpg --edit-key <KEY_ID>\n\n\n\n\nAdd the subkey:\n\n\ngpg> addkey\ngpg> save\n\n\n\n\nCopying the subkeys\n\n\nMake a copy of the keyring:\n\n\ntar cvzf ~/gpg-backup-post.tgz ~/.gnupg\n\n\n\n\nCopy \ngpg-backup-post.tgz\n to an encrypted USB device.\n\n\nDelete both local backups:\n\n\nshred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz\n\n\n\n\nImporting the subkeys\n\n\nThe following commands are run in the laptop.\n\n\ncp /media/encrypted-usb ~/gpg-backup-post.tgz\ngpg --export-secret-subkeys <KEY_ID> > /media/encrypted-usb/subkeys\ngpg --delete-secret-key <KEY_ID>\ngpg --import /media/encrypted-usb/subkeys\nshred -u /media/encrypted-usb/subkeys\n\n\n\n\nWe keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.",
             "title": "Generating a GPG key"
