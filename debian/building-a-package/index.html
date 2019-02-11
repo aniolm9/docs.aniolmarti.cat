@@ -7,14 +7,14 @@
         
         <meta name="author" content="Aniol Marti">
         
-        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>Generating a GPG key - Aniol Marti Docs</title>
+	<title>Building a package - Aniol Marti Docs</title>
 
-        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
-        <link href="../../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../../css/highlight.css">
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href="../../..">Aniol Marti Docs</a>
+            <a class="navbar-brand" href="../..">Aniol Marti Docs</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,36 +54,36 @@
                 
                 
                     <li >
-                        <a href="../../..">Home</a>
+                        <a href="../..">Home</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="../../../license/">License</a>
+                        <a href="../../license/">License</a>
                     </li>
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Debian <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../../debian/basic-configuration/">Basic configuration</a>
+    <a href="../basic-configuration/">Basic configuration</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Building a package</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../../debian/building-a-package/">Building a package</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../../../debian/listing-packages-from-a-given-origin/">Listing packages from a given origin</a>
+    <a href="../listing-packages-from-a-given-origin/">Listing packages from a given origin</a>
 </li>
 
                         
@@ -92,7 +92,7 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Security <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -102,14 +102,14 @@
     <ul class="dropdown-menu">
         
             
-<li class="active">
-    <a href="./">Generating a GPG key</a>
+<li >
+    <a href="../../security/GPG/Generating-a-GPG-key/">Generating a GPG key</a>
 </li>
 
         
             
 <li >
-    <a href="../Signing-commits-with-GPG/">Signing commits with GPG</a>
+    <a href="../../security/GPG/Signing-commits-with-GPG/">Signing commits with GPG</a>
 </li>
 
         
@@ -128,7 +128,7 @@
                         
                             
 <li >
-    <a href="../../../server/unattended-upgrades/">Unattended upgrades</a>
+    <a href="../../server/unattended-upgrades/">Unattended upgrades</a>
 </li>
 
                         
@@ -139,7 +139,7 @@
         
             
 <li >
-    <a href="../../../server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
+    <a href="../../server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
 </li>
 
         
@@ -162,12 +162,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../../debian/listing-packages-from-a-given-origin/">
+                        <a rel="next" href="../basic-configuration/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../Signing-commits-with-GPG/">
+                        <a rel="prev" href="../listing-packages-from-a-given-origin/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -192,111 +192,54 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#generating-a-gpg-key">Generating a GPG key</a></li>
+        <li class="main active"><a href="#building-a-package">Building a package</a></li>
         
-            <li><a href="#install-gnupg">Install GnuPG</a></li>
+            <li><a href="#in-the-chroot">In the chroot</a></li>
         
-            <li><a href="#increase-security">Increase security</a></li>
-        
-            <li><a href="#generate-a-key">Generate a key</a></li>
-        
-            <li><a href="#signing-and-encrypting">Signing and encrypting</a></li>
-        
-            <li><a href="#subkeys">Subkeys</a></li>
+            <li><a href="#export-display">Export Display</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="generating-a-gpg-key">Generating a GPG key</h1>
-<h2 id="install-gnupg">Install GnuPG</h2>
-<pre><code class="bash">sudo apt install gnupg dirmngr
+<h1 id="building-a-package">Building a package</h1>
+<p>Implementing a chroot with Sid: <a href="https://perl-team.pages.debian.net/autopkgtest.html#SETUP">https://perl-team.pages.debian.net/autopkgtest.html#SETUP</a></p>
+<h2 id="in-the-chroot">In the chroot</h2>
+<p><strong>Install:</strong></p>
+<pre><code class="bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make
 </code></pre>
 
-<h2 id="increase-security">Increase security</h2>
-<p><strong>Edit the file <code>~/.gnupg/gpg.conf</code>:</strong></p>
-<pre><code class="text">require-cross-certification
-keyserver hkp://keys.gnupg.net
-
-# 32 bit IDs are too weak and have collisions
-keyid-format long
-
-personal-digest-preferences SHA512
-cert-digest-algo SHA512
-default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
-no-emit-version 
-no-comments 
-personal-cipher-preferences AES AES256 AES192 CAST5
-ignore-time-conflict 
-allow-freeform-uid 
+<p><strong>File <code>~/.pbuilderrc</code> and <code>/root/.pbuilderrc</code>:</strong></p>
+<pre><code class="text">APTCACHE=/var/cache/pbuilder/aptcache
+ARCHITECTURE=$(dpkg --print-architecture)
+AUTO_DEBSIGN=no
+BUILDRESULT=/build
+DEBEMAIL=&quot;Nom Cognom &lt;elmeuemail@elmeudomini.com&gt;&quot;
+DISTRIBUTION=sid
+MIRRORSITE=http://deb.debian.org/debian
+EATMYDATA=yes
 </code></pre>
 
-<h2 id="generate-a-key">Generate a key</h2>
-<p><strong>Generate the key:</strong></p>
-<pre><code class="bash">gpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.
+<p><strong>Create the environment:</strong></p>
+<pre><code class="bash">sudo pbuilder create
 </code></pre>
 
-<p><strong>Generate the revoking certificate:</strong></p>
-<pre><code class="bash">gpg --gen-revoke &lt;KEY_ID&gt; &gt; ~/.gnupg/revoke-&lt;KEY_ID&gt;.crt
+<p>From now on, when we need to build a package we will just have to enter in a chroot.</p>
+<p><strong>Inside the directory with the source code of the package:</strong></p>
+<pre><code class="bash">sudo pbuilder update &amp;&amp; pdebuild
 </code></pre>
 
-<p><strong>Make our key public:</strong></p>
-<pre><code class="bash">gpg --send-key &lt;KEY_ID&gt;
+<p>The resulting files will be in <code>/build</code>.<br />
+<code>/build</code> can be found in the host system in <code>/var/lib/sbuild/build</code>.</p>
+<h2 id="export-display">Export Display</h2>
+<p><strong>In the host:</strong></p>
+<pre><code class="bash">xhost +local:
 </code></pre>
 
-<h2 id="signing-and-encrypting">Signing and encrypting</h2>
-<p><strong>Sign:</strong></p>
-<pre><code class="bash">gpg -[a]s &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-a → Armor: The output is in ASCII.</li>
-<li>-s → Sign: Signs the given text (ends with Ctrl-D) or a file.</li>
-</ul>
-<p><strong>Encrypt:</strong></p>
-<pre><code class="bash">gpg -[a]e -r &lt;ANOTHER_ID&gt; &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-e → Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.</li>
-<li>-r → Recipient: The ID of the person who will receive the encrypted message.</li>
-</ul>
-<h2 id="subkeys">Subkeys</h2>
-<h3 id="generating-the-subkeys">Generating the subkeys</h3>
-<p><strong>Backup the ~/.gnupg directory:</strong></p>
-<pre><code class="bash">umask 077 &amp;&amp; tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg
-</code></pre>
-
-<p><strong>Edit our key:</strong></p>
-<pre><code class="bash">gpg --edit-key &lt;KEY_ID&gt;
-</code></pre>
-
-<p><strong>Add the subkey:</strong></p>
-<pre><code class="bash">gpg&gt; addkey
-gpg&gt; save
-</code></pre>
-
-<h3 id="copying-the-subkeys">Copying the subkeys</h3>
-<p><strong>Make a copy of the keyring:</strong></p>
-<pre><code class="bash">tar cvzf ~/gpg-backup-post.tgz ~/.gnupg
-</code></pre>
-
-<p>Copy <code>gpg-backup-post.tgz</code> to an encrypted USB device.</p>
-<p><strong>Delete both local backups:</strong></p>
-<pre><code class="bash">shred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz
-</code></pre>
-
-<h3 id="importing-the-subkeys">Importing the subkeys</h3>
-<p>The following commands are run in the laptop.</p>
-<pre><code class="bash">cp /media/encrypted-usb ~/gpg-backup-post.tgz
-gpg --export-secret-subkeys &lt;KEY_ID&gt; &gt; /media/encrypted-usb/subkeys
-gpg --delete-secret-key &lt;KEY_ID&gt;
-gpg --import /media/encrypted-usb/subkeys
-shred -u /media/encrypted-usb/subkeys
-</code></pre>
-
-<p>We keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.</p></div>
+<p><strong>In the chroot:</strong></p>
+<pre><code>sudo export DISPLAY=:0
+</code></pre></div>
             
         </div>
 
@@ -308,12 +251,12 @@ shred -u /media/encrypted-usb/subkeys
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="../../../js/jquery-1.10.2.min.js"></script>
-        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../../../js/highlight.pack.js"></script>
-        <script>var base_url = '../../..';</script>
-        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
-        <script src="../../../js/base.js"></script>
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

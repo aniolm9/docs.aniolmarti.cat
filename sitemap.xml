@@ -26,6 +26,12 @@
     </url>
         
     <url>
+     <loc>None/debian/building-a-package/</loc>
+     <lastmod>2019-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>None/debian/listing-packages-from-a-given-origin/</loc>
      <lastmod>2019-02-11</lastmod>
      <changefreq>daily</changefreq>
