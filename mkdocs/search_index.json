@@ -271,6 +271,76 @@
             "title": "Signing commits with GPG"
         },
         {
+            "location": "/security/GPG/signing-party/",
+            "text": "Signing party\n\n\n\n\nDownload the key.\n\n\nCheck the fingerprint.\n\n\nSign the key.\n\n\nExport and send the key.\n\n\nAssign trust.\n\n\n\n\nWe'll be exploring two options.\n\n\nOption 1: By hand\n\n\nDownload the key\n\n\ngpg --recv-keys <ANOTHER_ID>\n\n\n\n\nCheck the fingerprint\n\n\ngpg --fingerprint <ANOTHER_ID>\n\n\n\n\nSign the key\n\n\ngpg --sign-key <ANOTHER_ID>\n\n\n\n\nExport the key\n\n\ngpg --armor --export <ANOTHER_ID> | gpg --encrypt -r <ANOTHER_ID> --armor --output <ANOTHER_ID>-signedBy-<KEY_ID>.asc\n\n\n\n\nThen, send \n<ANOTHER_ID>-signedBy-<KEY_ID>.asc\n to the \n owner.\n\n\nAssign trust\n\n\ngpg --edit-key <ANOTHER_ID>\ngpg> trust\ngpg> save\n\n\n\n\nImport the key\n\n\nOnce you receive your signed key you have to import it and make it public.\n\n\ngpg --import <KEY_ID>-signedBy-<ANOTHER_ID>.asc\ngpg --send-key <KEY_ID>\n\n\n\n\nOption 2: Using caff (^^)\n\n\nInstall the needed packages\n\n\nsudo apt install signing-party msmtp\n\n\n\n\nConfigure msmtp\n\n\nEncrypt your e-mail password:\n\n\ngpg --encrypt -o ~/.msmtp/bob.gpg -r <KEY_ID> -\n\n\n\n\nAfter typing your password press Enter and then Ctrl-D.\n\n\nEdit \n~/.msmtprc\n:\n\n\n# Set default values for all following accounts.\ndefaults\nauth on\ntls on\ntls_trust_file /etc/ssl/certs/ca-certificates.crt\nlogfile ~/.msmtp.log\n\naccount bob\nhost mail.example.com\nport 587\nfrom bob@example.com\nuser bob@example.com\npasswordeval \"gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.msmtp/bob.gpg\"\n\n# Set a default account\naccount default : bob\n\n\n\n\nYou can try it with:\n\n\nmsmtp <RECIPIENT_ADDRESS>\n\n\n\n\nConfigure caff\n\n\nEdit \n~/.caffrc\n:\n\n\n$CONFIG{'owner'} = 'Bob Morris';\n$CONFIG{'email'} = 'bob@example.com';\n$CONFIG{'keyid'} = [qw{<KEY_ID>}];\n$ENV{'PERL_MAILERS'} = 'sendmail:/usr/bin/msmtp';\n\n\n\n\nEdit \n~/.caff/gnupghome/gpg.conf\n:\n\n\npersonal-digest-preferences SHA512\ncert-digest-algo SHA512\ndefault-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed\n\n\n\n\nSign a key\n\n\nJust run:\n\n\ncaff <ANOTHER_ID>\n\n\n\n\nIt will ask you if you want to sign the UIDs and if you want to e-mail the signed keys.",
+            "title": "Signing party"
+        },
+        {
+            "location": "/security/GPG/signing-party/#signing-party",
+            "text": "Download the key.  Check the fingerprint.  Sign the key.  Export and send the key.  Assign trust.   We'll be exploring two options.",
+            "title": "Signing party"
+        },
+        {
+            "location": "/security/GPG/signing-party/#option-1-by-hand",
+            "text": "",
+            "title": "Option 1: By hand"
+        },
+        {
+            "location": "/security/GPG/signing-party/#download-the-key",
+            "text": "gpg --recv-keys <ANOTHER_ID>",
+            "title": "Download the key"
+        },
+        {
+            "location": "/security/GPG/signing-party/#check-the-fingerprint",
+            "text": "gpg --fingerprint <ANOTHER_ID>",
+            "title": "Check the fingerprint"
+        },
+        {
+            "location": "/security/GPG/signing-party/#sign-the-key",
+            "text": "gpg --sign-key <ANOTHER_ID>",
+            "title": "Sign the key"
+        },
+        {
+            "location": "/security/GPG/signing-party/#export-the-key",
+            "text": "gpg --armor --export <ANOTHER_ID> | gpg --encrypt -r <ANOTHER_ID> --armor --output <ANOTHER_ID>-signedBy-<KEY_ID>.asc  Then, send  <ANOTHER_ID>-signedBy-<KEY_ID>.asc  to the   owner.",
+            "title": "Export the key"
+        },
+        {
+            "location": "/security/GPG/signing-party/#assign-trust",
+            "text": "gpg --edit-key <ANOTHER_ID>\ngpg> trust\ngpg> save",
+            "title": "Assign trust"
+        },
+        {
+            "location": "/security/GPG/signing-party/#import-the-key",
+            "text": "Once you receive your signed key you have to import it and make it public.  gpg --import <KEY_ID>-signedBy-<ANOTHER_ID>.asc\ngpg --send-key <KEY_ID>",
+            "title": "Import the key"
+        },
+        {
+            "location": "/security/GPG/signing-party/#option-2-using-caff",
+            "text": "",
+            "title": "Option 2: Using caff (^^)"
+        },
+        {
+            "location": "/security/GPG/signing-party/#install-the-needed-packages",
+            "text": "sudo apt install signing-party msmtp",
+            "title": "Install the needed packages"
+        },
+        {
+            "location": "/security/GPG/signing-party/#configure-msmtp",
+            "text": "Encrypt your e-mail password:  gpg --encrypt -o ~/.msmtp/bob.gpg -r <KEY_ID> -  After typing your password press Enter and then Ctrl-D.  Edit  ~/.msmtprc :  # Set default values for all following accounts.\ndefaults\nauth on\ntls on\ntls_trust_file /etc/ssl/certs/ca-certificates.crt\nlogfile ~/.msmtp.log\n\naccount bob\nhost mail.example.com\nport 587\nfrom bob@example.com\nuser bob@example.com\npasswordeval \"gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.msmtp/bob.gpg\"\n\n# Set a default account\naccount default : bob  You can try it with:  msmtp <RECIPIENT_ADDRESS>",
+            "title": "Configure msmtp"
+        },
+        {
+            "location": "/security/GPG/signing-party/#configure-caff",
+            "text": "Edit  ~/.caffrc :  $CONFIG{'owner'} = 'Bob Morris';\n$CONFIG{'email'} = 'bob@example.com';\n$CONFIG{'keyid'} = [qw{<KEY_ID>}];\n$ENV{'PERL_MAILERS'} = 'sendmail:/usr/bin/msmtp';  Edit  ~/.caff/gnupghome/gpg.conf :  personal-digest-preferences SHA512\ncert-digest-algo SHA512\ndefault-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed",
+            "title": "Configure caff"
+        },
+        {
+            "location": "/security/GPG/signing-party/#sign-a-key",
+            "text": "Just run:  caff <ANOTHER_ID>  It will ask you if you want to sign the UIDs and if you want to e-mail the signed keys.",
+            "title": "Sign a key"
+        },
+        {
             "location": "/server/unattended-upgrades/",
             "text": "Unattended Upgrades\n\n\nunattended-upgrades\n is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.\n\n\nInstall the package:\n\n\nsudo apt install unattended-upgrades\n\n\n\n\nEdit the file \n/etc/apt/apt.conf.d/20auto-upgrades\n:\n\n\n// Enable the update/upgrade script (0=disable)\nAPT::Periodic::Enable \"1\";\n\n// Do \"apt-get update\" automatically every n-days (0=disable)\nAPT::Periodic::Update-Package-Lists \"1\";\n\n// Do \"apt-get upgrade --download-only\" every n-days (0=disable)\nAPT::Periodic::Download-Upgradeable-Packages \"1\";\n\n// Run the \"unattended-upgrade\" security upgrade script\n// every n-days (0=disabled)\n// Requires the package \"unattended-upgrades\" and will write\n// a log in /var/log/unattended-upgrades\nAPT::Periodic::Unattended-Upgrade \"1\";\n\n// Do \"apt-get autoclean\" every n-days (0=disable)\nAPT::Periodic::AutocleanInterval \"7\";\n\n\n\n\nUncomment some lines in \n/etc/apt/apt.conf.d/50unattended-upgrades\n:\n\n\n\"o=Debian,a=stable\";\n\"o=Debian,a=stable-updates\";\n//\"o=Debian,a=proposed-updates\";\n\"origin=Debian,codename=${distro_codename},label=Debian-Security\";\n\n\n\n\nRestart the service:\n\n\nsudo systemctl restart unattended-upgrades",
             "title": "Unattended upgrades"

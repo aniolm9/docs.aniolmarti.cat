@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Generating a GPG key - Aniol Marti Docs</title>
+	<title>Signing party - Aniol Marti Docs</title>
 
         <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
@@ -123,8 +123,8 @@
     <ul class="dropdown-menu">
         
             
-<li class="active">
-    <a href="./">Generating a GPG key</a>
+<li >
+    <a href="../Generating-a-GPG-key/">Generating a GPG key</a>
 </li>
 
         
@@ -135,8 +135,8 @@
 
         
             
-<li >
-    <a href="../signing-party/">Signing party</a>
+<li class="active">
+    <a href="./">Signing party</a>
 </li>
 
         
@@ -189,12 +189,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../../multimedia/spliting-a-.flac-using-a-.cue/">
+                        <a rel="next" href="../Signing-commits-with-GPG/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../Signing-commits-with-GPG/">
+                        <a rel="prev" href="../../../server/unattended-upgrades/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -219,111 +219,110 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#generating-a-gpg-key">Generating a GPG key</a></li>
+        <li class="main active"><a href="#signing-party">Signing party</a></li>
         
-            <li><a href="#install-gnupg">Install GnuPG</a></li>
+            <li><a href="#option-1-by-hand">Option 1: By hand</a></li>
         
-            <li><a href="#increase-security">Increase security</a></li>
-        
-            <li><a href="#generate-a-key">Generate a key</a></li>
-        
-            <li><a href="#signing-and-encrypting">Signing and encrypting</a></li>
-        
-            <li><a href="#subkeys">Subkeys</a></li>
+            <li><a href="#option-2-using-caff">Option 2: Using caff (^^)</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="generating-a-gpg-key">Generating a GPG key</h1>
-<h2 id="install-gnupg">Install GnuPG</h2>
-<pre><code class="bash">sudo apt install gnupg dirmngr
+<h1 id="signing-party">Signing party</h1>
+<ol>
+<li>Download the key.</li>
+<li>Check the fingerprint.</li>
+<li>Sign the key.</li>
+<li>Export and send the key.</li>
+<li>Assign trust.</li>
+</ol>
+<p>We'll be exploring two options.</p>
+<h2 id="option-1-by-hand">Option 1: By hand</h2>
+<h3 id="download-the-key">Download the key</h3>
+<pre><code class="bash">gpg --recv-keys &lt;ANOTHER_ID&gt;
 </code></pre>
 
-<h2 id="increase-security">Increase security</h2>
-<p><strong>Edit the file <code>~/.gnupg/gpg.conf</code>:</strong></p>
-<pre><code class="text">require-cross-certification
-keyserver hkp://keys.gnupg.net
-
-# 32 bit IDs are too weak and have collisions
-keyid-format long
-
-personal-digest-preferences SHA512
-cert-digest-algo SHA512
-default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
-no-emit-version 
-no-comments 
-personal-cipher-preferences AES AES256 AES192 CAST5
-ignore-time-conflict 
-allow-freeform-uid 
+<h3 id="check-the-fingerprint">Check the fingerprint</h3>
+<pre><code class="bash">gpg --fingerprint &lt;ANOTHER_ID&gt;
 </code></pre>
 
-<h2 id="generate-a-key">Generate a key</h2>
-<p><strong>Generate the key:</strong></p>
-<pre><code class="bash">gpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.
+<h3 id="sign-the-key">Sign the key</h3>
+<pre><code class="bash">gpg --sign-key &lt;ANOTHER_ID&gt;
 </code></pre>
 
-<p><strong>Generate the revoking certificate:</strong></p>
-<pre><code class="bash">gpg --gen-revoke &lt;KEY_ID&gt; &gt; ~/.gnupg/revoke-&lt;KEY_ID&gt;.crt
+<h3 id="export-the-key">Export the key</h3>
+<pre><code class="bash">gpg --armor --export &lt;ANOTHER_ID&gt; | gpg --encrypt -r &lt;ANOTHER_ID&gt; --armor --output &lt;ANOTHER_ID&gt;-signedBy-&lt;KEY_ID&gt;.asc
 </code></pre>
 
-<p><strong>Make our key public:</strong></p>
-<pre><code class="bash">gpg --send-key &lt;KEY_ID&gt;
-</code></pre>
-
-<h2 id="signing-and-encrypting">Signing and encrypting</h2>
-<p><strong>Sign:</strong></p>
-<pre><code class="bash">gpg -[a]s &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-a → Armor: The output is in ASCII.</li>
-<li>-s → Sign: Signs the given text (ends with Ctrl-D) or a file.</li>
-</ul>
-<p><strong>Encrypt:</strong></p>
-<pre><code class="bash">gpg -[a]e -r &lt;ANOTHER_ID&gt; &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-e → Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.</li>
-<li>-r → Recipient: The ID of the person who will receive the encrypted message.</li>
-</ul>
-<h2 id="subkeys">Subkeys</h2>
-<h3 id="generating-the-subkeys">Generating the subkeys</h3>
-<p><strong>Backup the ~/.gnupg directory:</strong></p>
-<pre><code class="bash">umask 077 &amp;&amp; tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg
-</code></pre>
-
-<p><strong>Edit our key:</strong></p>
-<pre><code class="bash">gpg --edit-key &lt;KEY_ID&gt;
-</code></pre>
-
-<p><strong>Add the subkey:</strong></p>
-<pre><code class="bash">gpg&gt; addkey
+<p>Then, send <code>&lt;ANOTHER_ID&gt;-signedBy-&lt;KEY_ID&gt;.asc</code> to the <KEY_ID> owner.</p>
+<h3 id="assign-trust">Assign trust</h3>
+<pre><code class="bash">gpg --edit-key &lt;ANOTHER_ID&gt;
+gpg&gt; trust
 gpg&gt; save
 </code></pre>
 
-<h3 id="copying-the-subkeys">Copying the subkeys</h3>
-<p><strong>Make a copy of the keyring:</strong></p>
-<pre><code class="bash">tar cvzf ~/gpg-backup-post.tgz ~/.gnupg
+<h3 id="import-the-key">Import the key</h3>
+<p>Once you receive your signed key you have to import it and make it public.</p>
+<pre><code class="bash">gpg --import &lt;KEY_ID&gt;-signedBy-&lt;ANOTHER_ID&gt;.asc
+gpg --send-key &lt;KEY_ID&gt;
 </code></pre>
 
-<p>Copy <code>gpg-backup-post.tgz</code> to an encrypted USB device.</p>
-<p><strong>Delete both local backups:</strong></p>
-<pre><code class="bash">shred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz
+<h2 id="option-2-using-caff">Option 2: Using caff (^^)</h2>
+<h3 id="install-the-needed-packages">Install the needed packages</h3>
+<pre><code class="bash">sudo apt install signing-party msmtp
 </code></pre>
 
-<h3 id="importing-the-subkeys">Importing the subkeys</h3>
-<p>The following commands are run in the laptop.</p>
-<pre><code class="bash">cp /media/encrypted-usb ~/gpg-backup-post.tgz
-gpg --export-secret-subkeys &lt;KEY_ID&gt; &gt; /media/encrypted-usb/subkeys
-gpg --delete-secret-key &lt;KEY_ID&gt;
-gpg --import /media/encrypted-usb/subkeys
-shred -u /media/encrypted-usb/subkeys
+<h3 id="configure-msmtp">Configure msmtp</h3>
+<p><strong>Encrypt your e-mail password:</strong></p>
+<pre><code class="bash">gpg --encrypt -o ~/.msmtp/bob.gpg -r &lt;KEY_ID&gt; -
 </code></pre>
 
-<p>We keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.</p></div>
+<p>After typing your password press Enter and then Ctrl-D.</p>
+<p><strong>Edit <code>~/.msmtprc</code>:</strong></p>
+<pre><code class="text"># Set default values for all following accounts.
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.msmtp.log
+
+account bob
+host mail.example.com
+port 587
+from bob@example.com
+user bob@example.com
+passwordeval &quot;gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.msmtp/bob.gpg&quot;
+
+# Set a default account
+account default : bob
+</code></pre>
+
+<p>You can try it with:</p>
+<pre><code class="bash">msmtp &lt;RECIPIENT_ADDRESS&gt;
+</code></pre>
+
+<h3 id="configure-caff">Configure caff</h3>
+<p><strong>Edit <code>~/.caffrc</code>:</strong></p>
+<pre><code class="text">$CONFIG{'owner'} = 'Bob Morris';
+$CONFIG{'email'} = 'bob@example.com';
+$CONFIG{'keyid'} = [qw{&lt;KEY_ID&gt;}];
+$ENV{'PERL_MAILERS'} = 'sendmail:/usr/bin/msmtp';
+</code></pre>
+
+<p><strong>Edit <code>~/.caff/gnupghome/gpg.conf</code>:</strong></p>
+<pre><code class="text">personal-digest-preferences SHA512
+cert-digest-algo SHA512
+default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
+</code></pre>
+
+<h3 id="sign-a-key">Sign a key</h3>
+<p>Just run:</p>
+<pre><code class="bash">caff &lt;ANOTHER_ID&gt;
+</code></pre>
+
+<p>It will ask you if you want to sign the UIDs and if you want to e-mail the signed keys.</p></div>
             
         </div>
 
