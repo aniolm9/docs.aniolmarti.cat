@@ -389,6 +389,16 @@
             "location": "/server/web/certbot-reverse-proxy/#generating-certs_1",
             "text": "In the host machine:  sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com  Actually, this order will create the renewal file.",
             "title": "Generating certs"
+        },
+        {
+            "location": "/server/web/wordpress-reverse-proxy/",
+            "text": "Wordpress reverse proxy\n\n\nWhen using a nginx reverse proxy to Apache and accessing the Wordpress site using HTTPS it returns a \nRedirect Error\n. Adding some lines to \nwp-config.php\n fixes it.\n\n\nAfter the line \ndefine('WP_DEBUG', false)\n add:\n\n\n// Reverse proxy patch\nif ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {\n    $_SERVER['HTTPS'] = 'on';\n    $_SERVER['SERVER_PORT'] = 443;\n}",
+            "title": "Wordpress reverse proxy"
+        },
+        {
+            "location": "/server/web/wordpress-reverse-proxy/#wordpress-reverse-proxy",
+            "text": "When using a nginx reverse proxy to Apache and accessing the Wordpress site using HTTPS it returns a  Redirect Error . Adding some lines to  wp-config.php  fixes it.  After the line  define('WP_DEBUG', false)  add:  // Reverse proxy patch\nif ( $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {\n    $_SERVER['HTTPS'] = 'on';\n    $_SERVER['SERVER_PORT'] = 443;\n}",
+            "title": "Wordpress reverse proxy"
         }
     ]
 }
