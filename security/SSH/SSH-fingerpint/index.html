@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Generating a GPG key - Aniol Marti Docs</title>
+	<title>SSH fingerpint - Aniol Marti Docs</title>
 
         <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
@@ -123,20 +123,20 @@
     <ul class="dropdown-menu">
         
             
-<li class="active">
-    <a href="./">Generating a GPG key</a>
+<li >
+    <a href="../../GPG/Generating-a-GPG-key/">Generating a GPG key</a>
 </li>
 
         
             
 <li >
-    <a href="../Signing-commits-with-GPG/">Signing commits with GPG</a>
+    <a href="../../GPG/Signing-commits-with-GPG/">Signing commits with GPG</a>
 </li>
 
         
             
 <li >
-    <a href="../signing-party/">Signing party</a>
+    <a href="../../GPG/signing-party/">Signing party</a>
 </li>
 
         
@@ -150,14 +150,14 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../../SSH/SSH-fingerpint/">SSH fingerpint</a>
+<li class="active">
+    <a href="./">SSH fingerpint</a>
 </li>
 
         
             
 <li >
-    <a href="../../SSH/Using-Yubikey/">Using Yubikey</a>
+    <a href="../Using-Yubikey/">Using Yubikey</a>
 </li>
 
         
@@ -216,12 +216,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../../multimedia/spliting-a-.flac-using-a-.cue/">
+                        <a rel="next" href="../../GPG/signing-party/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../Signing-commits-with-GPG/">
+                        <a rel="prev" href="../Using-Yubikey/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -246,111 +246,19 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#generating-a-gpg-key">Generating a GPG key</a></li>
-        
-            <li><a href="#install-gnupg">Install GnuPG</a></li>
-        
-            <li><a href="#increase-security">Increase security</a></li>
-        
-            <li><a href="#generate-a-key">Generate a key</a></li>
-        
-            <li><a href="#signing-and-encrypting">Signing and encrypting</a></li>
-        
-            <li><a href="#subkeys">Subkeys</a></li>
+        <li class="main active"><a href="#ssh-fingerprint">SSH fingerprint</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="generating-a-gpg-key">Generating a GPG key</h1>
-<h2 id="install-gnupg">Install GnuPG</h2>
-<pre><code class="bash">sudo apt install gnupg dirmngr
+<h1 id="ssh-fingerprint">SSH fingerprint</h1>
+<p>To get the fingerprint from a server you just need to run:</p>
+<pre><code class="bash">ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub
 </code></pre>
 
-<h2 id="increase-security">Increase security</h2>
-<p><strong>Edit the file <code>~/.gnupg/gpg.conf</code>:</strong></p>
-<pre><code class="text">require-cross-certification
-keyserver hkp://keys.gnupg.net
-
-# 32 bit IDs are too weak and have collisions
-keyid-format long
-
-personal-digest-preferences SHA512
-cert-digest-algo SHA512
-default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
-no-emit-version 
-no-comments 
-personal-cipher-preferences AES AES256 AES192 CAST5
-ignore-time-conflict 
-allow-freeform-uid 
-</code></pre>
-
-<h2 id="generate-a-key">Generate a key</h2>
-<p><strong>Generate the key:</strong></p>
-<pre><code class="bash">gpg --full-gen-key # 4096 bits and SHA-2 hashing is recommended.
-</code></pre>
-
-<p><strong>Generate the revoking certificate:</strong></p>
-<pre><code class="bash">gpg --gen-revoke &lt;KEY_ID&gt; &gt; ~/.gnupg/revoke-&lt;KEY_ID&gt;.crt
-</code></pre>
-
-<p><strong>Make our key public:</strong></p>
-<pre><code class="bash">gpg --send-key &lt;KEY_ID&gt;
-</code></pre>
-
-<h2 id="signing-and-encrypting">Signing and encrypting</h2>
-<p><strong>Sign:</strong></p>
-<pre><code class="bash">gpg -[a]s &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-a → Armor: The output is in ASCII.</li>
-<li>-s → Sign: Signs the given text (ends with Ctrl-D) or a file.</li>
-</ul>
-<p><strong>Encrypt:</strong></p>
-<pre><code class="bash">gpg -[a]e -r &lt;ANOTHER_ID&gt; &lt;FILE&gt;
-</code></pre>
-
-<ul>
-<li>-e → Encrypt: Encrypts the given text (ends with Ctrl-D) or a file.</li>
-<li>-r → Recipient: The ID of the person who will receive the encrypted message.</li>
-</ul>
-<h2 id="subkeys">Subkeys</h2>
-<h3 id="generating-the-subkeys">Generating the subkeys</h3>
-<p><strong>Backup the ~/.gnupg directory:</strong></p>
-<pre><code class="bash">umask 077 &amp;&amp; tar -cvzf ~/gnupg-backup-pre.tgz ~/.gnupg
-</code></pre>
-
-<p><strong>Edit our key:</strong></p>
-<pre><code class="bash">gpg --edit-key &lt;KEY_ID&gt;
-</code></pre>
-
-<p><strong>Add the subkey:</strong></p>
-<pre><code class="bash">gpg&gt; addkey
-gpg&gt; save
-</code></pre>
-
-<h3 id="copying-the-subkeys">Copying the subkeys</h3>
-<p><strong>Make a copy of the keyring:</strong></p>
-<pre><code class="bash">tar cvzf ~/gpg-backup-post.tgz ~/.gnupg
-</code></pre>
-
-<p>Copy <code>gpg-backup-post.tgz</code> to an encrypted USB device.</p>
-<p><strong>Delete both local backups:</strong></p>
-<pre><code class="bash">shred -u ~/gpg-backup-post.tgz ~/gpg-backup-pre.tgz
-</code></pre>
-
-<h3 id="importing-the-subkeys">Importing the subkeys</h3>
-<p>The following commands are run in the laptop.</p>
-<pre><code class="bash">cp /media/encrypted-usb ~/gpg-backup-post.tgz
-gpg --export-secret-subkeys &lt;KEY_ID&gt; &gt; /media/encrypted-usb/subkeys
-gpg --delete-secret-key &lt;KEY_ID&gt;
-gpg --import /media/encrypted-usb/subkeys
-shred -u /media/encrypted-usb/subkeys
-</code></pre>
-
-<p>We keep the backup of the master key in the encrypted USB device. Though, this device should be hidden somewhere.</p></div>
+<p>It will print the fingerprint of every key (in modern Linux systems: ECDSA, RSA and ed25519).</p></div>
             
         </div>
 

@@ -341,6 +341,16 @@
             "title": "Sign a key"
         },
         {
+            "location": "/security/SSH/SSH-fingerpint/",
+            "text": "SSH fingerprint\n\n\nTo get the fingerprint from a server you just need to run:\n\n\nssh-keygen -lf /etc/ssh/ssh_host_*_key.pub\n\n\n\n\nIt will print the fingerprint of every key (in modern Linux systems: ECDSA, RSA and ed25519).",
+            "title": "SSH fingerpint"
+        },
+        {
+            "location": "/security/SSH/SSH-fingerpint/#ssh-fingerprint",
+            "text": "To get the fingerprint from a server you just need to run:  ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub  It will print the fingerprint of every key (in modern Linux systems: ECDSA, RSA and ed25519).",
+            "title": "SSH fingerprint"
+        },
+        {
             "location": "/security/SSH/Using-Yubikey/",
             "text": "Using Yubikey\n\n\nWe will be using a GPG key as a SSH one with the Yubikey. I guess that the Yubikey already contains a sign, an encrypt and an authorize subkeys. See \nthe Yubikey official site\n for further details.\n\n\nInstall some packages:\n\n\nsudo apt install gnupg2 pcscd scdaemon\n\n\n\n\nEdit \n~/.gnupg/gpg-agent.conf\n:\n\n\nenable-ssh-support\ndefault-cache-ttl-ssh 10800\nmax-cache-ttl-ssh 10800\n\n\n\n\nEdit \n~/.bashrc\n:\n\n\n# Set SSH to use gpg-agent\nunset SSH_AGENT_PID\nif [ \"${gnupg_SSH_AUTH_SOCK_by:-0}\" -ne $$ ]; then\n  export SSH_AUTH_SOCK=\"$(gpgconf --list-dirs agent-ssh-socket)\"\nfi\n\n# Set GPG TTY\nexport GPG_TTY=$(tty)\n\n# Refresh gpg-agent tty in case user switches into an X session\ngpg-connect-agent updatestartuptty /bye >/dev/null\n\n\n\n\nTo check if it works:\n\n\nssh-add -L\nssh-rsa AAAAB3NzaC ... pdqtlwX6m1 cardno:000123457915 # Output",
             "title": "Using Yubikey"
