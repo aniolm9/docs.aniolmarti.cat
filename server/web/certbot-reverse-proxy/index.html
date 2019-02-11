@@ -202,8 +202,8 @@
 <h2 id="virtualhosts-in-the-same-machine">Virtualhosts in the same machine</h2>
 <p>Nothing special, just use Certbot webroot renew.</p>
 <p><strong>Configuration example:</strong></p>
-<pre><code># renew_before_expiry = 30 days
-version = 0.10.2
+<pre><code class="text"># renew_before_expiry = 30 days
+version = &lt;VERSION&gt;
 archive_dir = /etc/letsencrypt/archive/example.com
 cert = /etc/letsencrypt/live/example.com/cert.pem
 privkey = /etc/letsencrypt/live/example.com/privkey.pem
@@ -223,14 +223,14 @@ example.com = /var/www/example.com
 
 <h3 id="generating-certs">Generating certs</h3>
 <p><strong>In the host machine:</strong></p>
-<pre><code>$ sudo certbot certonly -w /var/www/example.com/ -d example.com -d www.example.com
+<pre><code class="bash">$ sudo certbot certonly -w /var/www/example.com/ -d example.com -d www.example.com
 </code></pre>
 
 <p>Actually, this order will create the renewal file.</p>
 <h2 id="virtualhosts-in-another-machine">Virtualhosts in another machine</h2>
 <p>First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is <strong>/var/www/example</strong>. Taking that into account, the renewal file:</p>
-<pre><code># renew_before_expiry = 30 days
-version = 0.10.2
+<pre><code class="text"># renew_before_expiry = 30 days
+version = &lt;VERSION&gt;
 archive_dir = /etc/letsencrypt/archive/example.com
 cert = /etc/letsencrypt/live/example.com/cert.pem
 privkey = /etc/letsencrypt/live/example.com/privkey.pem
@@ -253,19 +253,19 @@ machine.example.com = /var/www/machine
 <p>Now we have two options:</p>
 <h3 id="option-1">Option 1</h3>
 <p><strong>Add a line in the <code>.htaccess</code> where the web is located:</strong></p>
-<pre><code>Redirect 301 /.well-known http://machine.example.com/.well-known
+<pre><code class="text">Redirect 301 /.well-known http://machine.example.com/.well-known
 </code></pre>
 
 <h3 id="option-2">Option 2 (^^)</h3>
 <p><strong>Modify the nginx site in the reverse proxy server:</strong></p>
-<pre><code>location ^~ /.well-known/acme-challenge/ {
+<pre><code class="text">location ^~ /.well-known/acme-challenge/ {
     root /var/www/machine;
 }
 </code></pre>
 
 <h3 id="generating-certs_1">Generating certs</h3>
 <p><strong>In the host machine:</strong></p>
-<pre><code>$ sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com
+<pre><code class="bash">$ sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com
 </code></pre>
 
 <p>Actually, this order will create the renewal file.</p></div>

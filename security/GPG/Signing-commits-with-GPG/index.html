@@ -195,13 +195,13 @@
 
 <h1 id="signing-commits-with-gpg">Signing commits with GPG</h1>
 <p>You just need a GPG key. Please see <a href="../Generating-a-GPG-key/">Generating a GPG key</a> for further details.</p>
-<pre><code>git config --global gpg.program gpg2 # Set the binary to use
+<pre><code class="bash">git config --global gpg.program gpg2 # Set the binary to use
 git config --global user.signingkey IDCLAU # Set the user GPG key ID
 git config --global commit.gpgsign true # Always sign the commits
 </code></pre>
 
 <p>In order to manually sign a commit:</p>
-<pre><code>git commit -S -m &quot;Commit message&quot;
+<pre><code class="bash">git commit -S -m &quot;Commit message&quot;
 </code></pre></div>
             
         </div>

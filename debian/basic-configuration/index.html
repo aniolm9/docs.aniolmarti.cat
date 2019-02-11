@@ -205,24 +205,24 @@
 <p>Obviously, using non-free and contrib repos and installing Java and the kernel from backports is not needed, but may be useful, so I'm keeping it here.</p>
 <h2 id="sudo">Sudo</h2>
 <p><strong>Install the package:</strong></p>
-<pre><code>$ su
+<pre><code class="bash">$ su
 # apt install sudo
 </code></pre>
 
 <p><strong>Add a user:</strong></p>
-<pre><code># adduser &lt;user&gt; sudo
+<pre><code class="bash"># adduser &lt;user&gt; sudo
 </code></pre>
 
 <h2 id="repositories">Repositories</h2>
 <p><strong>Install vim:</strong></p>
-<pre><code>$ sudo apt install vim
+<pre><code class="bash">$ sudo apt install vim
 </code></pre>
 
-<pre><code>$ sudo vim /etc/apt/sources.list
+<pre><code class="bash">$ sudo vim /etc/apt/sources.list
 </code></pre>
 
 <p><strong>Delete everything and add:</strong></p>
-<pre><code>## Official
+<pre><code class="text">## Official
 deb http://ftp.caliu.cat/debian/ stretch main contrib non-free
 deb-src http://ftp.caliu.cat/debian/ stretch main contrib non-free
 
@@ -238,48 +238,48 @@ deb http://http.debian.net/debian stretch-backports main
 
 <p>I'm using Caliu.cat repos as they are the nearest to my location.</p>
 <p><strong>Update:</strong></p>
-<pre><code>$ sudo apt update
+<pre><code class="bash">$ sudo apt update
 </code></pre>
 
 <p><strong>Install build-essentials and git:</strong></p>
-<pre><code>$ sudo apt install linux-headers-$(uname -r) build-essential checkinstall make automake cmake autoconf git git-core
+<pre><code class="bash">$ sudo apt install linux-headers-$(uname -r) build-essential checkinstall make automake cmake autoconf git git-core
 </code></pre>
 
 <p><strong>Compressor:</strong></p>
-<pre><code>$ sudo apt install rar unrar p7zip-full p7zip-rar
+<pre><code class="bash">$ sudo apt install rar unrar p7zip-full p7zip-rar
 </code></pre>
 
 <p><strong>Update and upgrade:</strong></p>
-<pre><code>$ sudo apt update
+<pre><code class="bash">$ sudo apt update
 $ sudo apt upgrade
 </code></pre>
 
 <h2 id="installing-the-kernel-from-backports">Installing the kernel from backports</h2>
 <p><strong>Check for new versions:</strong></p>
-<pre><code>$ sudo apt-cache search linux-image
+<pre><code class="bash">$ sudo apt-cache search linux-image
 </code></pre>
 
 <p><strong>Install the kernel:</strong></p>
-<pre><code>$ sudo apt -t stretch-backports install &lt;linux-image&gt;
+<pre><code class="bash">$ sudo apt -t stretch-backports install &lt;linux-image&gt;
 </code></pre>
 
 <h2 id="installing-java">Installing Java</h2>
 <p><strong>Add the repos:</strong></p>
-<pre><code>echo &quot;## Java&quot; &gt;&gt; /etc/apt/sources.list.d/java
+<pre><code class="bash">echo &quot;## Java&quot; &gt;&gt; /etc/apt/sources.list.d/java
 echo &quot;deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main&quot; &gt;&gt; /etc/apt/sources.list.d/java
 echo &quot;deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main&quot; &gt;&gt; /etc/apt/sources.list.d/java
 </code></pre>
 
 <p><strong>Install the key:</strong></p>
-<pre><code>$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+<pre><code class="bash">$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 </code></pre>
 
 <p><strong>Update:</strong></p>
-<pre><code>$ sudo apt update
+<pre><code class="bash">$ sudo apt update
 </code></pre>
 
 <p><strong>Install Java:</strong></p>
-<pre><code>$ sudo apt install oracle-java8-installer
+<pre><code class="bash">$ sudo apt install oracle-java8-installer
 </code></pre></div>
             
         </div>

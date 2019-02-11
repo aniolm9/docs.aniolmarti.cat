@@ -195,10 +195,12 @@
 
 <h1 id="unattended-upgrades">Unattended Upgrades</h1>
 <p><strong>unattended-upgrades</strong> is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.</p>
-<p><strong>Install the package:</strong>
-<code># apt install unattended-upgrades</code></p>
+<p><strong>Install the package:</strong></p>
+<pre><code class="bash">$ sudo apt install unattended-upgrades
+</code></pre>
+
 <p><strong>Edit the file <code>/etc/apt/apt.conf.d/20auto-upgrades</code>:</strong></p>
-<pre><code>// Enable the update/upgrade script (0=disable)
+<pre><code class="text">// Enable the update/upgrade script (0=disable)
 APT::Periodic::Enable &quot;1&quot;;
 
 // Do &quot;apt-get update&quot; automatically every n-days (0=disable)
@@ -218,14 +220,15 @@ APT::Periodic::AutocleanInterval &quot;7&quot;;
 </code></pre>
 
 <p><strong>Uncomment some lines in <code>/etc/apt/apt.conf.d/50unattended-upgrades</code>:</strong></p>
-<pre><code>&quot;o=Debian,a=stable&quot;;
+<pre><code class="text">&quot;o=Debian,a=stable&quot;;
 &quot;o=Debian,a=stable-updates&quot;;
 //&quot;o=Debian,a=proposed-updates&quot;;
 &quot;origin=Debian,codename=${distro_codename},label=Debian-Security&quot;;
 </code></pre>
 
 <p><strong>Restart the service:</strong></p>
-<p><code># systemctl restart unattended-upgrades</code></p></div>
+<pre><code class="bash">$ sudo systemctl restart unattended-upgrades
+</code></pre></div>
             
         </div>
 
