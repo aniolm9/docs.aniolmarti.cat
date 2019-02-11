@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>None/license/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,19 +21,19 @@
         
     <url>
      <loc>None/debian/basic-configuration/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/debian/building-a-package/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/debian/listing-packages-from-a-given-origin/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -43,19 +43,25 @@
         
     <url>
      <loc>None/multimedia/Useful-FFmpeg-and-mkvmerge-commands/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/multimedia/spliting-a-.flac-using-a-.cue/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     
 
     
+        
+    <url>
+     <loc>None/security/debian-full-disk-encryption/</loc>
+     <lastmod>2019-02-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
         
     <url>
      <loc>None</loc>
@@ -75,7 +81,7 @@
         
     <url>
      <loc>None/server/unattended-upgrades/</loc>
-     <lastmod>2019-02-11</lastmod>
+     <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
