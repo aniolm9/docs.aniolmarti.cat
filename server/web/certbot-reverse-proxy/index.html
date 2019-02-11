@@ -185,6 +185,12 @@ www.example.com = /var/www/example.com
 example.com = /var/www/example.com
 </code></pre>
 
+<h3 id="generating-certs">Generating certs</h3>
+<p><strong>In the host machine:</strong></p>
+<pre><code>$ sudo certbot certonly -w /var/www/example.com/ -d example.com -d www.example.com
+</code></pre>
+
+<p>Actually, this order will create the renewal file.</p>
 <h2 id="virtualhosts-in-another-machine">Virtualhosts in another machine</h2>
 <p>First we need to create a subdomain pointing to the device that has the reverse proxy installed. The root for this domain is <strong>/var/www/example</strong>. Taking that into account, the renewal file:</p>
 <pre><code># renew_before_expiry = 30 days
@@ -219,7 +225,14 @@ machine.example.com = /var/www/machine
 <pre><code>location ^~ /.well-known/acme-challenge/ {
     root /var/www/machine;
 }
-</code></pre></div>
+</code></pre>
+
+<h3 id="generating-certs_1">Generating certs</h3>
+<p><strong>In the host machine:</strong></p>
+<pre><code>$ sudo certbot certonly -w /var/www/machine/ -d example.com -d www.example.com -d blog.example.com -d machine.example.com
+</code></pre>
+
+<p>Actually, this order will create the renewal file.</p></div>
             
         </div>
 
