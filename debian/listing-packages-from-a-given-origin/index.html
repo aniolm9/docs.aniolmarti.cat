@@ -195,7 +195,7 @@
 
 <h1 id="listing-packages-from-a-given-origin">Listing packages from a given origin</h1>
 <p>Just run:</p>
-<pre><code>ORIGIN=deb-multimedia # For example
+<pre><code class="bash">ORIGIN=deb-multimedia # For example
 dpkg -l | awk '/^.i/ {print $2}' | xargs apt-cache policy | awk '/^[a-z0-9.-]+:/ {pkg=$1}; /***/ {OFS=&quot;\t&quot;; ver=$2; getline; print pkg,ver,$2,$3}'|grep -v /var/lib/dpkg/status| sed -e 's/://'|awk '{printf &quot;%-40s %-36s %-36s %-16s \n&quot;,$1,$2,$3, $4}' | grep -i $ORIGIN | cut -d&quot; &quot; -f1
 </code></pre></div>
             
