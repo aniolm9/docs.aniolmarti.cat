@@ -7,14 +7,14 @@
         
         <meta name="author" content="Aniol Marti">
         
-        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Unattended upgrades - Aniol Marti Docs</title>
+	<title>Generating a GPG key - Aniol Marti Docs</title>
 
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href="../..">Aniol Marti Docs</a>
+            <a class="navbar-brand" href="../../..">Aniol Marti Docs</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,13 +54,13 @@
                 
                 
                     <li >
-                        <a href="../..">Home</a>
+                        <a href="../../..">Home</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="../../license/">License</a>
+                        <a href="../../../license/">License</a>
                     </li>
                 
                 
@@ -71,7 +71,7 @@
                         
                             
 <li >
-    <a href="../../debian/basic-configuration/">Basic configuration</a>
+    <a href="../../../debian/basic-configuration/">Basic configuration</a>
 </li>
 
                         
@@ -80,7 +80,7 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Security <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -90,14 +90,14 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../../security/GPG/Generating-a-GPG-key/">Generating a GPG key</a>
+<li class="active">
+    <a href="./">Generating a GPG key</a>
 </li>
 
         
             
 <li >
-    <a href="../../security/GPG/Signing-commits-with-GPG/">Signing commits with GPG</a>
+    <a href="../Signing-commits-with-GPG/">Signing commits with GPG</a>
 </li>
 
         
@@ -110,13 +110,13 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Server <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li class="active">
-    <a href="./">Unattended upgrades</a>
+<li >
+    <a href="../../../server/unattended-upgrades/">Unattended upgrades</a>
 </li>
 
                         
@@ -127,7 +127,7 @@
         
             
 <li >
-    <a href="../web/certbot-reverse-proxy/">Certbot reverse proxy</a>
+    <a href="../../../server/web/certbot-reverse-proxy/">Certbot reverse proxy</a>
 </li>
 
         
@@ -150,12 +150,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../security/GPG/Signing-commits-with-GPG/">
+                        <a rel="next" href="../../../debian/basic-configuration/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../web/certbot-reverse-proxy/">
+                        <a rel="prev" href="../Signing-commits-with-GPG/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -180,46 +180,11 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#unattended-upgrades">Unattended Upgrades</a></li>
-        
-    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="unattended-upgrades">Unattended Upgrades</h1>
-<p><strong>unattended-upgrades</strong> is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.</p>
-<p><strong>Install the package:</strong>
-<code># apt install unattended-upgrades</code></p>
-<p><strong>Edit the file <code>/etc/apt/apt.conf.d/20auto-upgrades</code>:</strong></p>
-<pre><code>// Enable the update/upgrade script (0=disable)
-APT::Periodic::Enable &quot;1&quot;;
-
-// Do &quot;apt-get update&quot; automatically every n-days (0=disable)
-APT::Periodic::Update-Package-Lists &quot;1&quot;;
-
-// Do &quot;apt-get upgrade --download-only&quot; every n-days (0=disable)
-APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
-
-// Run the &quot;unattended-upgrade&quot; security upgrade script
-// every n-days (0=disabled)
-// Requires the package &quot;unattended-upgrades&quot; and will write
-// a log in /var/log/unattended-upgrades
-APT::Periodic::Unattended-Upgrade &quot;1&quot;;
-
-// Do &quot;apt-get autoclean&quot; every n-days (0=disable)
-APT::Periodic::AutocleanInterval &quot;7&quot;;
-</code></pre>
-
-<p><strong>Uncomment some lines in <code>/etc/apt/apt.conf.d/50unattended-upgrades</code>:</strong></p>
-<pre><code>&quot;o=Debian,a=stable&quot;;
-&quot;o=Debian,a=stable-updates&quot;;
-//&quot;o=Debian,a=proposed-updates&quot;;
-&quot;origin=Debian,codename=${distro_codename},label=Debian-Security&quot;;
-</code></pre>
-
-<p><strong>Restart the service:</strong></p>
-<p><code># systemctl restart unattended-upgrades</code></p></div>
+<p>Foo bar</p></div>
             
         </div>
 
@@ -231,12 +196,12 @@ APT::Periodic::AutocleanInterval &quot;7&quot;;
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="../../js/jquery-1.10.2.min.js"></script>
-        <script src="../../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../../js/highlight.pack.js"></script>
-        <script>var base_url = '../..';</script>
-        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-        <script src="../../js/base.js"></script>
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

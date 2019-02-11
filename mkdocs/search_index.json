@@ -116,17 +116,17 @@
             "title": "Installing Java"
         },
         {
-            "location": "/security/GPG/generating-a-GPG-key/",
+            "location": "/security/GPG/Generating-a-GPG-key/",
             "text": "Foo bar",
-            "title": "generating a GPG key"
+            "title": "Generating a GPG key"
         },
         {
-            "location": "/security/GPG/signing-commits-with-GPG/",
+            "location": "/security/GPG/Signing-commits-with-GPG/",
             "text": "Signing commits with GPG\n\n\nYou just need a GPG key (see \nGenerating a GPG key\n).\n\n\ngit config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits\n\n\n\n\nIn order to manually sign a commit:\n\n\ngit commit -S -m \"Commit message\"",
-            "title": "signing commits with GPG"
+            "title": "Signing commits with GPG"
         },
         {
-            "location": "/security/GPG/signing-commits-with-GPG/#signing-commits-with-gpg",
+            "location": "/security/GPG/Signing-commits-with-GPG/#signing-commits-with-gpg",
             "text": "You just need a GPG key (see  Generating a GPG key ).  git config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits  In order to manually sign a commit:  git commit -S -m \"Commit message\"",
             "title": "Signing commits with GPG"
         },
