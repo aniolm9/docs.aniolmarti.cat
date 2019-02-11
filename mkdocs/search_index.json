@@ -122,12 +122,12 @@
         },
         {
             "location": "/security/GPG/Signing-commits-with-GPG/",
-            "text": "Signing commits with GPG\n\n\nYou just need a GPG key (see \nGenerating a GPG key\n).\n\n\ngit config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits\n\n\n\n\nIn order to manually sign a commit:\n\n\ngit commit -S -m \"Commit message\"",
+            "text": "Signing commits with GPG\n\n\nYou just need a GPG key. Please see \nGenerating a GPG key\n for further details.\n\n\ngit config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits\n\n\n\n\nIn order to manually sign a commit:\n\n\ngit commit -S -m \"Commit message\"",
             "title": "Signing commits with GPG"
         },
         {
             "location": "/security/GPG/Signing-commits-with-GPG/#signing-commits-with-gpg",
-            "text": "You just need a GPG key (see  Generating a GPG key ).  git config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits  In order to manually sign a commit:  git commit -S -m \"Commit message\"",
+            "text": "You just need a GPG key. Please see  Generating a GPG key  for further details.  git config --global gpg.program gpg2 # Set the binary to use\ngit config --global user.signingkey IDCLAU # Set the user GPG key ID\ngit config --global commit.gpgsign true # Always sign the commits  In order to manually sign a commit:  git commit -S -m \"Commit message\"",
             "title": "Signing commits with GPG"
         },
         {
