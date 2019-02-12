@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>None/</loc>
+     <loc>https://docs.aniolmarti.cat/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -11,7 +11,7 @@
 
     
     <url>
-     <loc>None/license/</loc>
+     <loc>https://docs.aniolmarti.cat/license/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -20,29 +20,7 @@
     
         
     <url>
-     <loc>None/ALAR/CSGO-dedicated-server/</loc>
-     <lastmod>2019-02-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>None/debian/basic-configuration/</loc>
-     <lastmod>2019-02-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/debian/building-a-package/</loc>
-     <lastmod>2019-02-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/debian/listing-packages-from-a-given-origin/</loc>
+     <loc>https://docs.aniolmarti.cat/ALAR/CSGO-dedicated-server/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -52,13 +30,19 @@
     
         
     <url>
-     <loc>None/multimedia/Useful-FFmpeg-and-mkvmerge-commands/</loc>
+     <loc>https://docs.aniolmarti.cat/debian/basic-configuration/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/multimedia/spliting-a-.flac-using-a-.cue/</loc>
+     <loc>https://docs.aniolmarti.cat/debian/building-a-package/</loc>
+     <lastmod>2019-02-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://docs.aniolmarti.cat/debian/listing-packages-from-a-given-origin/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -68,19 +52,35 @@
     
         
     <url>
-     <loc>None/security/debian-full-disk-encryption/</loc>
+     <loc>https://docs.aniolmarti.cat/multimedia/Useful-FFmpeg-and-mkvmerge-commands/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None</loc>
+     <loc>https://docs.aniolmarti.cat/multimedia/spliting-a-.flac-using-a-.cue/</loc>
+     <lastmod>2019-02-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://docs.aniolmarti.cat/security/debian-full-disk-encryption/</loc>
+     <lastmod>2019-02-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://docs.aniolmarti.cat</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None</loc>
+     <loc>https://docs.aniolmarti.cat</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -90,13 +90,13 @@
     
         
     <url>
-     <loc>None/server/unattended-upgrades/</loc>
+     <loc>https://docs.aniolmarti.cat/server/unattended-upgrades/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None</loc>
+     <loc>https://docs.aniolmarti.cat</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
