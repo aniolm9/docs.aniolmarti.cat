@@ -6,7 +6,7 @@ Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.
 **Install:**
 
 ```bash
-sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make
+sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools
 ```
 
 **File `~/.pbuilderrc` and `/root/.pbuilderrc`:**
@@ -50,5 +50,5 @@ xhost +local:
 **In the chroot:**
 
 ```
-sudo export DISPLAY=:0
+export DISPLAY=:0
 ```
