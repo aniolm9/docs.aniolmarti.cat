@@ -90,6 +90,12 @@
     
         
     <url>
+     <loc>https://docs.aniolmarti.cat/server/iptables/</loc>
+     <lastmod>2019-02-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://docs.aniolmarti.cat/server/unattended-upgrades/</loc>
      <lastmod>2019-02-12</lastmod>
      <changefreq>daily</changefreq>

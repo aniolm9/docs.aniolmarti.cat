@@ -436,6 +436,56 @@
             "title": "Using Yubikey"
         },
         {
+            "location": "/server/iptables/",
+            "text": "iptables cheatsheet\n\n\nList rules\n\n\nsudo iptables -L\n\n\n\n\nFlush rules\n\n\nsudo iptables -F\n\n\n\n\nBlock ports\n\n\nKeep established connections\n\n\nsudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\n\n\n\n\n\n\n-A\n adds the rule.\n\n\nINPUT\n defines the rule as part of the input string.\n\n\n-m conntrack\n with \n--ctstate ESTABLISHED,RELATED\n  ensures that only applies to established and related connections.\n\n\n-j ACCEPT\n accepts the packages.\n\n\n\n\nAccept desired ports\n\n\nsudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT\nsudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT\nsudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT\n\n\n\n\n\n\n-p\n sets the connection protocol.\n\n\n--dport\n sets the connection port.\n\n\n\n\nBlock other connections\n\n\nsudo iptables -P INPUT DROP\n\n\n\n\nAllow loopback connections\n\n\nsudo iptables -I INPUT 1 -i lo -j ACCEPT\n\n\n\n\n\n\n-I INPUT 1\n places the rule first in the table.\n\n\n-i lo\n loopback interface.\n\n\n\n\nSaving the rules\n\n\nsudo apt install iptables-persistent\nsudo iptables-save > /etc/iptables/rules.v4",
+            "title": "Iptables"
+        },
+        {
+            "location": "/server/iptables/#iptables-cheatsheet",
+            "text": "",
+            "title": "iptables cheatsheet"
+        },
+        {
+            "location": "/server/iptables/#list-rules",
+            "text": "sudo iptables -L",
+            "title": "List rules"
+        },
+        {
+            "location": "/server/iptables/#flush-rules",
+            "text": "sudo iptables -F",
+            "title": "Flush rules"
+        },
+        {
+            "location": "/server/iptables/#block-ports",
+            "text": "",
+            "title": "Block ports"
+        },
+        {
+            "location": "/server/iptables/#keep-established-connections",
+            "text": "sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT   -A  adds the rule.  INPUT  defines the rule as part of the input string.  -m conntrack  with  --ctstate ESTABLISHED,RELATED   ensures that only applies to established and related connections.  -j ACCEPT  accepts the packages.",
+            "title": "Keep established connections"
+        },
+        {
+            "location": "/server/iptables/#accept-desired-ports",
+            "text": "sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT\nsudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT\nsudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT   -p  sets the connection protocol.  --dport  sets the connection port.",
+            "title": "Accept desired ports"
+        },
+        {
+            "location": "/server/iptables/#block-other-connections",
+            "text": "sudo iptables -P INPUT DROP",
+            "title": "Block other connections"
+        },
+        {
+            "location": "/server/iptables/#allow-loopback-connections",
+            "text": "sudo iptables -I INPUT 1 -i lo -j ACCEPT   -I INPUT 1  places the rule first in the table.  -i lo  loopback interface.",
+            "title": "Allow loopback connections"
+        },
+        {
+            "location": "/server/iptables/#saving-the-rules",
+            "text": "sudo apt install iptables-persistent\nsudo iptables-save > /etc/iptables/rules.v4",
+            "title": "Saving the rules"
+        },
+        {
             "location": "/server/unattended-upgrades/",
             "text": "Unattended Upgrades\n\n\nunattended-upgrades\n is a package that allows to perform automatic system upgrades. A very simple configuration is shown below.\n\n\nInstall the package:\n\n\nsudo apt install unattended-upgrades\n\n\n\n\nEdit the file \n/etc/apt/apt.conf.d/20auto-upgrades\n:\n\n\n// Enable the update/upgrade script (0=disable)\nAPT::Periodic::Enable \"1\";\n\n// Do \"apt-get update\" automatically every n-days (0=disable)\nAPT::Periodic::Update-Package-Lists \"1\";\n\n// Do \"apt-get upgrade --download-only\" every n-days (0=disable)\nAPT::Periodic::Download-Upgradeable-Packages \"1\";\n\n// Run the \"unattended-upgrade\" security upgrade script\n// every n-days (0=disabled)\n// Requires the package \"unattended-upgrades\" and will write\n// a log in /var/log/unattended-upgrades\nAPT::Periodic::Unattended-Upgrade \"1\";\n\n// Do \"apt-get autoclean\" every n-days (0=disable)\nAPT::Periodic::AutocleanInterval \"7\";\n\n\n\n\nUncomment some lines in \n/etc/apt/apt.conf.d/50unattended-upgrades\n:\n\n\n\"o=Debian,a=stable\";\n\"o=Debian,a=stable-updates\";\n//\"o=Debian,a=proposed-updates\";\n\"origin=Debian,codename=${distro_codename},label=Debian-Security\";\n\n\n\n\nRestart the service:\n\n\nsudo systemctl restart unattended-upgrades",
             "title": "Unattended upgrades"
