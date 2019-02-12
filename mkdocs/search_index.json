@@ -86,6 +86,36 @@
             "title": "Section 8 \u2013 Interpretation."
         },
         {
+            "location": "/ALAR/CSGO-dedicated-server/",
+            "text": "Counter Strike: Global Offensive dedicated server\n\n\nIn order to install and configure a CSGO server you need SteamCMD.\n\n\nInstalling SteamCMD\n\n\nsudo -i\napt install lib32gcc1 libstdc++6 lib32stdc++6\nadduser --system steam\nmkdir -p /srv/games\nchown -R steam:root /srv/games\nsu --shell /bin/bash steam\ncd ~\nwget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz\ntar xvzf steamcmd_linux.tar.gz\nchmod +x steamcmd.sh\n./steamcmd.sh\n\n\n\n\nNow we'll have to wait until \nSteam>\n appears. \n\n\nDownloading the CSGO server\n\n\nIt's about 10GB of data, so if your connection is not fast, good luck.\n\n\nIn SteamCMD:\n\n\nlogin anonymous\nforce_install_dir /srv/games/csgo_1\napp_update 740 validate\n\n\n\n\nThe number 740 stands for the CSGO server. You can see all the available applications \nhere\n.\n\nWhen it finishes it will print the message \nApp '740' fully installed\n. To exit SteamCMD just type \nquit\n.\n\n\nBooting the server\n\n\nWe will boot the server process using \nscreen\n. If you are physically connected to the server you can just boot it in a tty.\n\n\nUsing \nscreen\n:\n\n\napt install screen\nscript /dev/null\nscreen -S CSGO1\ncd /srv/games/csgo_1\n\n\n\n\nCasual:\n\n\n./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 0 +mapgroup mg_active +map de_dust2\n\n\n\n\nClassic Competitive:\n\n\n./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 1 +mapgroup mg_active +map de_dust2\n\n\n\n\nArms Race:\n\n\n./srcds_run -game csgo -console -usercon +game_type 1 +game_mode 0 +mapgroup mg_armsrace +map ar_shoots\n\n\n\n\nDemolition:\n\n\n./srcds_run -game csgo -console -usercon +game_type 1 +game_mode 1 +mapgroup mg_demolition +map de_lake\n\n\n\n\nDisable bots:\n Add \n-nobots\n.\n\n\nChange port:\n Add \nport 27016\n.\n\n\nEnable logging:\n: Add \n-condebug\n.\n\n\nTo detach screen type Ctrl+A+D.\n\nTo attach again \nscreen -r CSGO1\n.\n\n\nSources\n\n\nValve Wiki",
+            "title": "CSGO dedicated server"
+        },
+        {
+            "location": "/ALAR/CSGO-dedicated-server/#counter-strike-global-offensive-dedicated-server",
+            "text": "In order to install and configure a CSGO server you need SteamCMD.",
+            "title": "Counter Strike: Global Offensive dedicated server"
+        },
+        {
+            "location": "/ALAR/CSGO-dedicated-server/#installing-steamcmd",
+            "text": "sudo -i\napt install lib32gcc1 libstdc++6 lib32stdc++6\nadduser --system steam\nmkdir -p /srv/games\nchown -R steam:root /srv/games\nsu --shell /bin/bash steam\ncd ~\nwget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz\ntar xvzf steamcmd_linux.tar.gz\nchmod +x steamcmd.sh\n./steamcmd.sh  Now we'll have to wait until  Steam>  appears.",
+            "title": "Installing SteamCMD"
+        },
+        {
+            "location": "/ALAR/CSGO-dedicated-server/#downloading-the-csgo-server",
+            "text": "It's about 10GB of data, so if your connection is not fast, good luck.  In SteamCMD:  login anonymous\nforce_install_dir /srv/games/csgo_1\napp_update 740 validate  The number 740 stands for the CSGO server. You can see all the available applications  here . \nWhen it finishes it will print the message  App '740' fully installed . To exit SteamCMD just type  quit .",
+            "title": "Downloading the CSGO server"
+        },
+        {
+            "location": "/ALAR/CSGO-dedicated-server/#booting-the-server",
+            "text": "We will boot the server process using  screen . If you are physically connected to the server you can just boot it in a tty.  Using  screen :  apt install screen\nscript /dev/null\nscreen -S CSGO1\ncd /srv/games/csgo_1  Casual:  ./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 0 +mapgroup mg_active +map de_dust2  Classic Competitive:  ./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 1 +mapgroup mg_active +map de_dust2  Arms Race:  ./srcds_run -game csgo -console -usercon +game_type 1 +game_mode 0 +mapgroup mg_armsrace +map ar_shoots  Demolition:  ./srcds_run -game csgo -console -usercon +game_type 1 +game_mode 1 +mapgroup mg_demolition +map de_lake  Disable bots:  Add  -nobots .  Change port:  Add  port 27016 .  Enable logging: : Add  -condebug .  To detach screen type Ctrl+A+D. \nTo attach again  screen -r CSGO1 .",
+            "title": "Booting the server"
+        },
+        {
+            "location": "/ALAR/CSGO-dedicated-server/#sources",
+            "text": "Valve Wiki",
+            "title": "Sources"
+        },
+        {
             "location": "/debian/basic-configuration/",
             "text": "Basic configuration\n\n\nObviously, using non-free and contrib repos and installing Java and the kernel from backports is not needed, but may be useful, so I'm keeping it here.\n\n\nSudo\n\n\nInstall the package:\n\n\nsu\napt install sudo\n\n\n\n\nAdd a user:\n\n\nadduser <user> sudo\n\n\n\n\nRepositories\n\n\nInstall vim:\n\n\nsudo apt install vim\n\n\n\n\nsudo vim /etc/apt/sources.list\n\n\n\n\nDelete everything and add:\n\n\n## Official\ndeb http://ftp.caliu.cat/debian/ stretch main contrib non-free\ndeb-src http://ftp.caliu.cat/debian/ stretch main contrib non-free\n\n## Updates\ndeb http://security.debian.org/ stretch/updates main\ndeb-src http://security.debian.org/ stretch/updates main\ndeb http://ftp.caliu.cat/debian/ stretch-updates main\ndeb-src http://ftp.caliu.cat/debian/ stretch-updates main\n\n## Backports\ndeb http://http.debian.net/debian stretch-backports main\n\n\n\n\nI'm using Caliu.cat repos as they are the nearest to my location.\n\n\nUpdate:\n\n\nsudo apt update\n\n\n\n\nInstall build-essentials and git:\n\n\nsudo apt install linux-headers-$(uname -r) build-essential checkinstall make automake cmake autoconf git git-core\n\n\n\n\nCompressor:\n\n\nsudo apt install rar unrar p7zip-full p7zip-rar\n\n\n\n\nUpdate and upgrade:\n\n\nsudo apt update\nsudo apt upgrade\n\n\n\n\nInstalling the kernel from backports\n\n\nCheck for new versions:\n\n\nsudo apt-cache search linux-image\n\n\n\n\nInstall the kernel:\n\n\nsudo apt -t stretch-backports install <linux-image>\n\n\n\n\nInstalling Java\n\n\nAdd the repos:\n\n\necho \"## Java\" >> /etc/apt/sources.list.d/java\necho \"deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main\" >> /etc/apt/sources.list.d/java\necho \"deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main\" >> /etc/apt/sources.list.d/java\n\n\n\n\nInstall the key:\n\n\nsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886\n\n\n\n\nUpdate:\n\n\nsudo apt update\n\n\n\n\nInstall Java:\n\n\nsudo apt install oracle-java8-installer",
             "title": "Basic configuration"
