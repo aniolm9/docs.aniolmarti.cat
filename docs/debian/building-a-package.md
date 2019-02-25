@@ -11,7 +11,7 @@ sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim b
 
 **Set an alias for Lintian:**
 ```
-echo 'alias lintian="lintian --pedantic --display-info"' > ~/.bashrc
+echo 'alias lintian="lintian --pedantic --display-info"' > /etc/profile.d/00-aliases.sh
 ```
 
 **File `~/.pbuilderrc` and `/root/.pbuilderrc`:**
