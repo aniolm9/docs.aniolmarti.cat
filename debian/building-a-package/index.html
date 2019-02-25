@@ -309,7 +309,12 @@
 <p>Implementing a chroot with Sid: <a href="https://perl-team.pages.debian.net/autopkgtest.html#SETUP">https://perl-team.pages.debian.net/autopkgtest.html#SETUP</a></p>
 <h2 id="in-the-chroot">In the chroot</h2>
 <p><strong>Install:</strong></p>
-<pre><code class="bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt
+<pre><code class="bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest
+</code></pre>
+
+<p><strong>Set an alias for Lintian:</strong></p>
+<pre><code>su &lt;user&gt;
+echo 'alias lintian=&quot;lintian --pedantic --display-info&quot;' &gt; ~/.bashrc
 </code></pre>
 
 <p><strong>File <code>~/.pbuilderrc</code> and <code>/root/.pbuilderrc</code>:</strong></p>
