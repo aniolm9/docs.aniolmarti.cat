@@ -6,7 +6,12 @@ Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.
 **Install:**
 
 ```bash
-sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt
+sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest
+```
+
+**Set an alias for Lintian:**
+```
+echo 'alias lintian="lintian --pedantic --display-info"' > ~/.bashrc
 ```
 
 **File `~/.pbuilderrc` and `/root/.pbuilderrc`:**
