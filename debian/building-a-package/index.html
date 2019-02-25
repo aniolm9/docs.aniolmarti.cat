@@ -298,6 +298,8 @@
         
             <li><a href="#in-the-chroot">In the chroot</a></li>
         
+            <li><a href="#run-a-test">Run a test</a></li>
+        
             <li><a href="#export-display">Export Display</a></li>
         
     
@@ -338,6 +340,11 @@ EATMYDATA=yes
 
 <p>The resulting files will be in <code>/build</code>.<br />
 <code>/build</code> can be found in the host system in <code>/var/lib/sbuild/build</code>.</p>
+<h2 id="run-a-test">Run a test</h2>
+<p>If there are tests configures in <code>debian/tests</code> you can test them with:</p>
+<pre><code>sudo autopkgtest -- null
+</code></pre>
+
 <h2 id="export-display">Export Display</h2>
 <p><strong>In the host:</strong></p>
 <pre><code class="bash">xhost +local:
