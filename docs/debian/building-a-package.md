@@ -10,7 +10,7 @@ sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim b
 ```
 
 **Set an alias for Lintian:**
-```
+```bash
 echo 'alias lintian="lintian --pedantic --display-info"' > /etc/profile.d/00-aliases.sh
 ```
 
@@ -46,7 +46,7 @@ The resulting files will be in `/build`.
 
 ## Run a test
 If there are tests configures in `debian/tests` you can test them with:
-```
+```bash
 sudo autopkgtest -- null
 ```
 
