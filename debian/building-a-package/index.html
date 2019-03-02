@@ -329,11 +329,21 @@ MIRRORSITE=http://deb.debian.org/debian
 EATMYDATA=yes
 </code></pre>
 
-<p><strong>Create the environment:</strong></p>
-<pre><code class="bash">sudo pbuilder create
+<p><strong>Export <code>DEBEMAIL</code>:</strong></p>
+<pre><code class="bash">echo 'DEBEMAIL=&quot;Nom Cognom &lt;elmeuemail@elmeudomini.com&gt;&quot;' &gt; /etc/profile.d/01-debemail.sh
+echo &quot;export DEBEMAIL&quot; &gt;&gt; /etc/profile.d/01-debemail.sh
 </code></pre>
 
-<p>From now on, when we need to build a package we will just have to enter in a chroot.</p>
+<p><strong> Set Quilt patches path:</strong></p>
+<pre><code class="bash">echo &quot;QUILT_PATCHES=debian/patches&quot; &gt; /home/&lt;user&gt;/.quiltrc
+chown &lt;user&gt;:&lt;user&gt; /home/&lt;user&gt;/.quiltrc
+</code></pre>
+
+<p><strong>Create the environment:</strong></p>
+<pre><code class="bash">pbuilder create
+</code></pre>
+
+<p>From now on, when we need to build a package we will just have to enter in a chroot running <code>schroot -c sid-amd64-sbuild</code>.</p>
 <p><strong>Inside the directory with the source code of the package:</strong></p>
 <pre><code class="bash">sudo pbuilder update &amp;&amp; pdebuild
 </code></pre>
