@@ -57,7 +57,7 @@ The resulting files will be in `/build`.
 `/build` can be found in the host system in `/var/lib/sbuild/build`.
 
 ## Run a test
-If there are tests configures in `debian/tests` you can test them with:
+If there are tests configured in `debian/tests` you can test them with:
 ```bash
 sudo autopkgtest -- null
 ```
