@@ -27,13 +27,25 @@ MIRRORSITE=http://deb.debian.org/debian
 EATMYDATA=yes
 ```
 
+**Export `DEBEMAIL`:**
+```bash
+echo 'DEBEMAIL="Nom Cognom <elmeuemail@elmeudomini.com>"' > /etc/profile.d/01-debemail.sh
+echo "export DEBEMAIL" >> /etc/profile.d/01-debemail.sh
+```
+
+** Set Quilt patches path:**
+```bash
+echo "QUILT_PATCHES=debian/patches" > /home/<user>/.quiltrc
+chown <user>:<user> /home/<user>/.quiltrc
+```
+
 **Create the environment:**
 
 ```bash
-sudo pbuilder create
+pbuilder create
 ```
 
-From now on, when we need to build a package we will just have to enter in a chroot.
+From now on, when we need to build a package we will just have to enter in a chroot running `schroot -c sid-amd64-sbuild`.
 
 **Inside the directory with the source code of the package:**
 
