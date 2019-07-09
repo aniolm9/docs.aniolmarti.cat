@@ -6,7 +6,7 @@ Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.
 **Install:**
 
 ```bash
-sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata
+sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata blhc
 ```
 
 **Set an alias for Lintian:**
@@ -21,7 +21,7 @@ APTCACHE=/var/cache/pbuilder/aptcache
 ARCHITECTURE=$(dpkg --print-architecture)
 AUTO_DEBSIGN=no
 BUILDRESULT=/build
-DEBEMAIL="Nom Cognom <elmeuemail@elmeudomini.com>"
+DEBEMAIL="Name Surname <email@example.com>"
 DISTRIBUTION=sid
 MIRRORSITE=http://deb.debian.org/debian
 EATMYDATA=yes
@@ -29,7 +29,7 @@ EATMYDATA=yes
 
 **Export `DEBEMAIL`:**
 ```bash
-echo 'DEBEMAIL="Nom Cognom <elmeuemail@elmeudomini.com>"' > /etc/profile.d/01-debemail.sh
+echo 'DEBEMAIL="Name Surname <email@example.com>"' > /etc/profile.d/01-debemail.sh
 echo "export DEBEMAIL" >> /etc/profile.d/01-debemail.sh
 ```
 
@@ -75,3 +75,23 @@ xhost +local:
 ```
 export DISPLAY=:0
 ```
+
+## Configure Salsa CI
+First read the Salsa CI Team documentation to activate it: [https://salsa.debian.org/salsa-ci-team/pipeline](https://salsa.debian.org/salsa-ci-team/pipeline)
+
+### Setting up a pristine-tar branch
+1. Create a `upstream/<version>` branch with the content of the upstream file (usually a .tar.gz).
+2. Rename the upstream package to `<package>_<version>.orig.tar.gz`.
+3. Create and push the pristine-tar branch:
+```bash
+pristine-tar commit <package>_<version>.orig.tar.gz upstream/<version>
+git push -u origin pristine-tar
+```
+
+### Creating the Git Build Package configuration file
+**Create the file `debian/gbp.conf` with the following content:**
+```text
+[DEFAULT]
+pristine-tar = True
+```
+Commit and push the changes.
