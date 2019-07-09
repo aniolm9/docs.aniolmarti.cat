@@ -1,4 +1,4 @@
-# Welcome
+# Home
 In this site I keep some documentation I gathered over the time. I try to keep everything up to date, but it isn't always possible.
 
 ## What can I find?
