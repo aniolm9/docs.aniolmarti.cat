@@ -199,6 +199,7 @@
             <li><a href="#run-a-test">Run a test</a></li>
             <li><a href="#export-display">Export Display</a></li>
             <li><a href="#configure-salsa-ci">Configure Salsa CI</a></li>
+            <li><a href="#forward-patches-to-upstream">Forward patches to upstream</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -278,7 +279,30 @@ git push -u origin pristine-tar
 pristine-tar = True
 </code></pre>
 
-<p>Commit and push the changes.</p></div>
+<p>Commit and push the changes.</p>
+<h2 id="forward-patches-to-upstream">Forward patches to upstream</h2>
+<p>Based on the Perl Team documentation: <a href="https://perl-team.pages.debian.net/forward.html">https://perl-team.pages.debian.net/forward.html</a></p>
+<p><strong>Install Perl Team packaging tools:</strong></p>
+<pre><code class="bash">sudo apt install pkg-perl-tools
+</code></pre>
+
+<p><strong>Create the file <code>debian/upstream/metadata</code> with the following content:</strong></p>
+<pre><code class="yaml">Name: &lt;PROJECT NAME&gt;
+Archive: GitHub
+Repository: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;.git
+Repository-Browse: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;
+Bug-Database: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;/issues
+Bug-Submit: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;/issues/new
+</code></pre>
+
+<p><strong>Create the file <code>~/.dpt.conf</code> with the following content:</strong></p>
+<pre><code class="text">DPT_GITHUB_ORGNAME=&lt;ORGANIZATION NAME&gt;
+DPT_GITHUB_OAUTH=&lt;PERSONAL ACCESS TOKEN&gt;
+</code></pre>
+
+<p>To forward the patch just run:</p>
+<pre><code class="bash">dpt forward debian/patches/&lt;PATCH FILE&gt;
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
