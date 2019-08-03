@@ -95,3 +95,32 @@ git push -u origin pristine-tar
 pristine-tar = True
 ```
 Commit and push the changes.
+
+## Forward patches to upstream
+Based on the Perl Team documentation: [https://perl-team.pages.debian.net/forward.html](https://perl-team.pages.debian.net/forward.html)
+
+**Install Perl Team packaging tools:**
+```bash
+sudo apt install pkg-perl-tools
+```
+
+**Create the file `debian/upstream/metadata` with the following content:**
+```yaml
+Name: <PROJECT NAME>
+Archive: GitHub
+Repository: https://github.com/<AUTHOR>/<REPO>.git
+Repository-Browse: https://github.com/<AUTHOR>/<REPO>
+Bug-Database: https://github.com/<AUTHOR>/<REPO>/issues
+Bug-Submit: https://github.com/<AUTHOR>/<REPO>/issues/new
+```
+
+**Create the file `~/.dpt.conf` with the following content:**
+```text
+DPT_GITHUB_ORGNAME=<ORGANIZATION NAME>
+DPT_GITHUB_OAUTH=<PERSONAL ACCESS TOKEN>
+```
+
+To forward the patch just run:
+```bash
+dpt forward debian/patches/<PATCH FILE>
+```
