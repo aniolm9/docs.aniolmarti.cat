@@ -118,6 +118,7 @@ Bug-Submit: https://github.com/<AUTHOR>/<REPO>/issues/new
 ```text
 DPT_GITHUB_ORGNAME=<ORGANIZATION NAME>
 DPT_GITHUB_OAUTH=<PERSONAL ACCESS TOKEN>
+DPT_GITHUB_BRANCH=pkg-debian-$(date +%s)
 ```
 
 To forward the patch just run:
