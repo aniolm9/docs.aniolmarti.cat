@@ -211,8 +211,12 @@
 <pre><code class="bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata blhc
 </code></pre>
 
-<p><strong>Set an alias for Lintian:</strong></p>
-<pre><code class="bash">echo 'alias lintian=&quot;lintian --pedantic --display-info&quot;' &gt; /etc/profile.d/00-aliases.sh
+<p><strong>File ~/.lintianrc:</strong></p>
+<pre><code class="text">LINTIAN_PROFILE=debian
+pedantic=yes
+display-experimental=yes
+verbose=yes
+display-info=yes
 </code></pre>
 
 <p><strong>File <code>~/.pbuilderrc</code> and <code>/root/.pbuilderrc</code>:</strong></p>
