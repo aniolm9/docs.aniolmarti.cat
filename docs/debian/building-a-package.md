@@ -9,9 +9,13 @@ Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.
 sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata blhc
 ```
 
-**Set an alias for Lintian:**
-```bash
-echo 'alias lintian="lintian --pedantic --display-info"' > /etc/profile.d/00-aliases.sh
+**File ~/.lintianrc:**
+```text
+LINTIAN_PROFILE=debian
+pedantic=yes
+display-experimental=yes
+verbose=yes
+display-info=yes
 ```
 
 **File `~/.pbuilderrc` and `/root/.pbuilderrc`:**
