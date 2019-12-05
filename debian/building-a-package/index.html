@@ -330,7 +330,7 @@ DPT_GITHUB_BRANCH=pkg-debian-$(date +%s)
 
 <h3 id="uploading-a-package">Uploading a package</h3>
 <p><strong>In your host run the following command inside the package directory:</strong></p>
-<pre><code class="bash">sbuild -s -d sid-amd64-sbuild --source-only-changes
+<pre><code class="bash">sbuild -s -d unstable -c sid-amd64-sbuild --source-only-changes
 </code></pre>
 
 <p><strong>Sign the package:</strong></p>
