@@ -195,6 +195,7 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#building-a-package">Building a package</a></li>
+            <li><a href="#in-the-host">In the host:</a></li>
             <li><a href="#in-the-chroot">In the chroot</a></li>
             <li><a href="#run-a-test">Run a test</a></li>
             <li><a href="#export-display">Export Display</a></li>
@@ -206,6 +207,24 @@
 
 <h1 id="building-a-package">Building a package</h1>
 <p>Implementing a chroot with Sid: <a href="https://perl-team.pages.debian.net/autopkgtest.html#SETUP">https://perl-team.pages.debian.net/autopkgtest.html#SETUP</a></p>
+<h2 id="in-the-host">In the host:</h2>
+<p><strong>File <code>~/.sbuildrc</code>:</strong></p>
+<pre><code class="text">$maintainer_name='Name Surname &lt;email@example.com&gt;';
+$distribution = &quot;unstable&quot;;
+$chroot = &quot;sid-amd64-sbuild&quot;;
+$build_arch_all = 1;
+$purge_build_directory = 'successful';
+$purge_session = 'successful';
+$purge_build_deps = 'successful';
+$build_source = 1;
+$source_only_changes = 1;
+1;
+</code></pre>
+
+<p><strong>File `~/.devscripts:</strong></p>
+<pre><code class="text">DEBSIGN_KEYID=&quot;0x40-CHARS-GPG-KEY-ID&quot;
+</code></pre>
+
 <h2 id="in-the-chroot">In the chroot</h2>
 <p><strong>Install:</strong></p>
 <pre><code class="bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata blhc
@@ -307,6 +326,19 @@ DPT_GITHUB_BRANCH=pkg-debian-$(date +%s)
 
 <p>To forward the patch just run:</p>
 <pre><code class="bash">dpt forward debian/patches/&lt;PATCH FILE&gt;
+</code></pre>
+
+<h3 id="uploading-a-package">Uploading a package</h3>
+<p><strong>In your host run the following command inside the package directory:</strong></p>
+<pre><code class="bash">sbuild -s -d sid-amd64-sbuild --source-only-changes
+</code></pre>
+
+<p><strong>Sign the package:</strong></p>
+<pre><code class="bash">debsign &lt;package&gt;_&lt;version&gt;_source.changes
+</code></pre>
+
+<p><strong>Upload the package:</strong></p>
+<pre><code class="bash">dput &lt;package&gt;_&lt;version&gt;_source.changes
 </code></pre></div>
         </div>
 
