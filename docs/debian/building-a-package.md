@@ -153,7 +153,7 @@ dpt forward debian/patches/<PATCH FILE>
 ### Uploading a package
 **In your host run the following command inside the package directory:**
 ```bash
-sbuild -s -d sid-amd64-sbuild --source-only-changes
+sbuild -s -d unstable -c sid-amd64-sbuild --source-only-changes
 ```
 
 **Sign the package:**
