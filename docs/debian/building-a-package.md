@@ -1,6 +1,26 @@
 # Building a package
 Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.html#SETUP](https://perl-team.pages.debian.net/autopkgtest.html#SETUP)
 
+## In the host:
+**File `~/.sbuildrc`:**
+```text
+$maintainer_name='Name Surname <email@example.com>';
+$distribution = "unstable";
+$chroot = "sid-amd64-sbuild";
+$build_arch_all = 1;
+$purge_build_directory = 'successful';
+$purge_session = 'successful';
+$purge_build_deps = 'successful';
+$build_source = 1;
+$source_only_changes = 1;
+1;
+```
+
+**File `~/.devscripts:**
+```text
+DEBSIGN_KEYID="0x40-CHARS-GPG-KEY-ID"
+```
+
 ## In the chroot
 
 **Install:**
@@ -128,4 +148,20 @@ DPT_GITHUB_BRANCH=pkg-debian-$(date +%s)
 To forward the patch just run:
 ```bash
 dpt forward debian/patches/<PATCH FILE>
+```
+
+### Uploading a package
+**In your host run the following command inside the package directory:**
+```bash
+sbuild -s -d sid-amd64-sbuild --source-only-changes
+```
+
+**Sign the package:**
+```bash
+debsign <package>_<version>_source.changes
+```
+
+**Upload the package:**
+```bash
+dput <package>_<version>_source.changes
 ```
