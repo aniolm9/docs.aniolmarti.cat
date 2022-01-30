@@ -8,5 +8,4 @@ Mostly operating systems related documentation and some other tech and geek stuf
 You can e-mail me at <aniol@aniolmarti.cat> and I'll fix it.
 
 ## Other sites
-**My blog:** <https://blog.aniolmarti.cat>  
 **My personal site:** <https://www.aniolmarti.cat>
