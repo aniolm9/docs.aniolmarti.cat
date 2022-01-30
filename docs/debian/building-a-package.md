@@ -31,7 +31,7 @@ sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim b
 
 **File ~/.lintianrc:**
 ```text
-LINTIAN_PROFILE=debian
+profile=debian
 pedantic=yes
 display-experimental=yes
 verbose=yes
@@ -99,6 +99,19 @@ xhost +local:
 ```
 export DISPLAY=:0
 ```
+
+## Check package reproducibility
+Install `eatmydata` and `reprotest` in the host:
+```bash
+sudo apt install eatmydata reprotest
+```
+
+Then, to check if a package is reproducible, run the following command inside the package directory:
+```bash
+sudo eatmydata reprotest --vary=domain_host.use_sudo=1 --auto-build . --min-cpu $(nproc) -- schroot sid-amd64-sbuild
+```
+
+The `--auto-build` argument will try to find the cause of the difference if the package is not reproducible.
 
 ## Configure Salsa CI
 First read the Salsa CI Team documentation to activate it: [https://salsa.debian.org/salsa-ci-team/pipeline](https://salsa.debian.org/salsa-ci-team/pipeline)
