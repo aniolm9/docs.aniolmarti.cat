@@ -1,5 +1,0 @@
-## Deployment
-In the repo docs.aniolmarti.cat run:
-```
-mkdocs gh-deploy --config-file ../docs-files/mkdocs.yml
-```
