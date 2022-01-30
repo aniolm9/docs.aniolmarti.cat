@@ -1,7 +1,7 @@
 # Building a package
 Implementing a chroot with Sid: [https://perl-team.pages.debian.net/autopkgtest.html#SETUP](https://perl-team.pages.debian.net/autopkgtest.html#SETUP)
 
-## In the host:
+## In the host
 **File `~/.sbuildrc`:**
 ```text
 $maintainer_name='Name Surname <email@example.com>';
