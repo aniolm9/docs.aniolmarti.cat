@@ -3,6 +3,5 @@ site_description: Some useful documentation.
 site_author: Aniol Martí
 site_url: https://docs.aniolmarti.cat
 repo_url: https://github.com/aniolm9/docs.aniolmarti.cat
-remote_branch: master
 copyright: Copyright &copy; 2022 <a href="https://twitter.com/aniol_marti">Aniol Martí</a>.
 docs_dir: docs/
