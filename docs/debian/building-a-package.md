@@ -163,7 +163,7 @@ To forward the patch just run:
 dpt forward debian/patches/<PATCH FILE>
 ```
 
-### Uploading a package
+## Uploading a package
 **In your host run the following command inside the package directory:**
 ```bash
 sbuild -s -d unstable -c sid-amd64-sbuild --source-only-changes
@@ -177,4 +177,26 @@ debsign <package>_<version>_source.changes
 **Upload the package:**
 ```bash
 dput <package>_<version>_source.changes
+```
+
+## Using pdebuild
+If we just want to use `pbuilder` without `sbuild` we first create the base:
+```bash
+sudo pbuilder create --mirror http://deb.debian.org/debian --distribution sid
+```
+
+In order to install packages inside the chroot we can use:
+```bash
+sudo pbuilder --login --save-after-login
+```
+
+To build a package, from its source directory run:
+```bash
+sudo pdebuild --use-pdebuild-internal
+```
+This command places the binary in `/var/cache/pbuilder/result`.
+
+Finally, to obtain the source-only files:
+```bash
+sudo pbuilder --build --source-only-changes <package>_<version>.dsc
 ```
