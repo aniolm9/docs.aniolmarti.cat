@@ -1,0 +1,1219 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Some useful documentation.">
+      
+      
+        <meta name="author" content="Aniol Martí">
+      
+      
+        <link rel="canonical" href="https://docs.aniolmarti.cat/debian/building-a-package/">
+      
+      
+        <link rel="prev" href="../basic-configuration/">
+      
+      
+        <link rel="next" href="../listing-packages-from-a-given-origin/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Building a package - Aniol Martí Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-a-package" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Aniol Martí Docs" class="md-header__button md-logo" aria-label="Aniol Martí Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aniol Martí Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building a package
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aniolm9/docs.aniolmarti.cat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Aniol Martí Docs" class="md-nav__button md-logo" aria-label="Aniol Martí Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Aniol Martí Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aniolm9/docs.aniolmarti.cat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          ALAR
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ALAR" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          ALAR
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ALAR/CSGO-dedicated-server/" class="md-nav__link">
+        Counter Strike: Global Offensive dedicated server
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="true">
+          Debian
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Debian" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Debian
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-configuration/" class="md-nav__link">
+        Basic configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Building a package
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Building a package
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-host" class="md-nav__link">
+    In the host
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-chroot" class="md-nav__link">
+    In the chroot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-a-test" class="md-nav__link">
+    Run a test
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-display" class="md-nav__link">
+    Export Display
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-package-reproducibility" class="md-nav__link">
+    Check package reproducibility
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-salsa-ci" class="md-nav__link">
+    Configure Salsa CI
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Salsa CI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-pristine-tar-branch" class="md-nav__link">
+    Setting up a pristine-tar branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-the-git-build-package-configuration-file" class="md-nav__link">
+    Creating the Git Build Package configuration file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-patches-to-upstream" class="md-nav__link">
+    Forward patches to upstream
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uploading-a-package" class="md-nav__link">
+    Uploading a package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-pdebuild" class="md-nav__link">
+    Using pdebuild
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../listing-packages-from-a-given-origin/" class="md-nav__link">
+        Listing packages from a given origin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../updating-a-package/" class="md-nav__link">
+        Updating a package
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Multimedia
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Multimedia" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Multimedia
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multimedia/Useful-FFmpeg-and-mkvmerge-commands/" class="md-nav__link">
+        Useful FFmpeg and mkvmerge commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multimedia/spliting-a-.flac-using-a-.cue/" class="md-nav__link">
+        Spliting a .flac using a .cue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Security
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Security" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Security
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/debian-full-disk-encryption/" class="md-nav__link">
+        Debian full disk encryption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_2" tabindex="0" aria-expanded="false">
+          GPG
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GPG" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPG
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/GPG/Generating-a-GPG-key/" class="md-nav__link">
+        Generating a GPG key
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/GPG/Signing-commits-with-GPG/" class="md-nav__link">
+        Signing commits with GPG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/GPG/signing-party/" class="md-nav__link">
+        Signing party
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_3" tabindex="0" aria-expanded="false">
+          SSH
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="SSH" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          SSH
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/SSH/SSH-fingerpint/" class="md-nav__link">
+        SSH fingerprint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/SSH/Using-Yubikey/" class="md-nav__link">
+        Using Yubikey
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          Server
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Server" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Server
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/iptables/" class="md-nav__link">
+        iptables cheatsheet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/unattended-upgrades/" class="md-nav__link">
+        Unattended Upgrades
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3" tabindex="0" aria-expanded="false">
+          KVM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="KVM" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          KVM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/KVM/NAT-script/" class="md-nav__link">
+        KVM NAT script
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Web" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/web/apache-redirect-non-www-to-www/" class="md-nav__link">
+        Redirecting non-www to www with .htaccess
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/web/certbot-reverse-proxy/" class="md-nav__link">
+        Let's Encrypt on a reverse proxy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/web/wordpress-reverse-proxy/" class="md-nav__link">
+        Wordpress reverse proxy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-host" class="md-nav__link">
+    In the host
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-chroot" class="md-nav__link">
+    In the chroot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-a-test" class="md-nav__link">
+    Run a test
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-display" class="md-nav__link">
+    Export Display
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-package-reproducibility" class="md-nav__link">
+    Check package reproducibility
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-salsa-ci" class="md-nav__link">
+    Configure Salsa CI
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Salsa CI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-pristine-tar-branch" class="md-nav__link">
+    Setting up a pristine-tar branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-the-git-build-package-configuration-file" class="md-nav__link">
+    Creating the Git Build Package configuration file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-patches-to-upstream" class="md-nav__link">
+    Forward patches to upstream
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uploading-a-package" class="md-nav__link">
+    Uploading a package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-pdebuild" class="md-nav__link">
+    Using pdebuild
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="building-a-package">Building a package</h1>
+<p>Implementing a chroot with Sid: <a href="https://perl-team.pages.debian.net/autopkgtest.html#SETUP">https://perl-team.pages.debian.net/autopkgtest.html#SETUP</a></p>
+<h2 id="in-the-host">In the host</h2>
+<p><strong>File <code>~/.sbuildrc</code>:</strong></p>
+<pre><code class="language-text">$maintainer_name='Name Surname &lt;email@example.com&gt;';
+$distribution = &quot;unstable&quot;;
+$chroot = &quot;sid-amd64-sbuild&quot;;
+$build_arch_all = 1;
+$purge_build_directory = 'successful';
+$purge_session = 'successful';
+$purge_build_deps = 'successful';
+$build_source = 1;
+$source_only_changes = 1;
+1;
+</code></pre>
+<p><strong>File `~/.devscripts:</strong></p>
+<pre><code class="language-text">DEBSIGN_KEYID=&quot;0x40-CHARS-GPG-KEY-ID&quot;
+</code></pre>
+<h2 id="in-the-chroot">In the chroot</h2>
+<p><strong>Install:</strong></p>
+<pre><code class="language-bash">sudo apt install --no-install-recommends devscripts debhelper pbuilder git vim build-essential dh-make dh-python python3-setuptools lintian quilt autopkgtest eatmydata blhc
+</code></pre>
+<p><strong>File ~/.lintianrc:</strong></p>
+<pre><code class="language-text">profile=debian
+pedantic=yes
+display-experimental=yes
+verbose=yes
+display-info=yes
+</code></pre>
+<p><strong>File <code>~/.pbuilderrc</code> and <code>/root/.pbuilderrc</code>:</strong></p>
+<pre><code class="language-text">APTCACHE=/var/cache/pbuilder/aptcache
+ARCHITECTURE=$(dpkg --print-architecture)
+AUTO_DEBSIGN=no
+BUILDRESULT=/build
+DEBEMAIL=&quot;Name Surname &lt;email@example.com&gt;&quot;
+DISTRIBUTION=sid
+MIRRORSITE=http://deb.debian.org/debian
+EATMYDATA=yes
+</code></pre>
+<p><strong>Export <code>DEBEMAIL</code>:</strong></p>
+<pre><code class="language-bash">echo 'DEBEMAIL=&quot;Name Surname &lt;email@example.com&gt;&quot;' &gt; /etc/profile.d/01-debemail.sh
+echo &quot;export DEBEMAIL&quot; &gt;&gt; /etc/profile.d/01-debemail.sh
+</code></pre>
+<p><strong> Set Quilt patches path:</strong></p>
+<pre><code class="language-bash">echo &quot;QUILT_PATCHES=debian/patches&quot; &gt; /home/&lt;user&gt;/.quiltrc
+chown &lt;user&gt;:&lt;user&gt; /home/&lt;user&gt;/.quiltrc
+</code></pre>
+<p><strong>Create the environment:</strong></p>
+<pre><code class="language-bash">pbuilder create
+</code></pre>
+<p>From now on, when we need to build a package we will just have to enter in a chroot running <code>schroot -c sid-amd64-sbuild</code>.</p>
+<p><strong>Inside the directory with the source code of the package:</strong></p>
+<pre><code class="language-bash">sudo pbuilder update &amp;&amp; pdebuild
+</code></pre>
+<p>The resulting files will be in <code>/build</code>.<br />
+<code>/build</code> can be found in the host system in <code>/var/lib/sbuild/build</code>.</p>
+<h2 id="run-a-test">Run a test</h2>
+<p>If there are tests configured in <code>debian/tests</code> you can test them with:</p>
+<pre><code class="language-bash">sudo autopkgtest -- null
+</code></pre>
+<h2 id="export-display">Export Display</h2>
+<p><strong>In the host:</strong></p>
+<pre><code class="language-bash">xhost +local:
+</code></pre>
+<p><strong>In the chroot:</strong></p>
+<pre><code>export DISPLAY=:0
+</code></pre>
+<h2 id="check-package-reproducibility">Check package reproducibility</h2>
+<p>Install <code>eatmydata</code> and <code>reprotest</code> in the host:</p>
+<pre><code class="language-bash">sudo apt install eatmydata reprotest
+</code></pre>
+<p>Then, to check if a package is reproducible, run the following command inside the package directory:</p>
+<pre><code class="language-bash">sudo eatmydata reprotest --vary=domain_host.use_sudo=1 --auto-build . --min-cpu $(nproc) -- schroot sid-amd64-sbuild
+</code></pre>
+<p>The <code>--auto-build</code> argument will try to find the cause of the difference if the package is not reproducible.</p>
+<h2 id="configure-salsa-ci">Configure Salsa CI</h2>
+<p>First read the Salsa CI Team documentation to activate it: <a href="https://salsa.debian.org/salsa-ci-team/pipeline">https://salsa.debian.org/salsa-ci-team/pipeline</a></p>
+<h3 id="setting-up-a-pristine-tar-branch">Setting up a pristine-tar branch</h3>
+<ol>
+<li>Create a <code>upstream/&lt;version&gt;</code> branch with the content of the upstream file (usually a .tar.gz).</li>
+<li>Rename the upstream package to <code>&lt;package&gt;_&lt;version&gt;.orig.tar.gz</code>.</li>
+<li>Create and push the pristine-tar branch:</li>
+</ol>
+<pre><code class="language-bash">pristine-tar commit &lt;package&gt;_&lt;version&gt;.orig.tar.gz upstream/&lt;version&gt;
+git push -u origin pristine-tar
+</code></pre>
+<h3 id="creating-the-git-build-package-configuration-file">Creating the Git Build Package configuration file</h3>
+<p><strong>Create the file <code>debian/gbp.conf</code> with the following content:</strong></p>
+<pre><code class="language-text">[DEFAULT]
+pristine-tar = True
+</code></pre>
+<p>Commit and push the changes.</p>
+<h2 id="forward-patches-to-upstream">Forward patches to upstream</h2>
+<p>Based on the Perl Team documentation: <a href="https://perl-team.pages.debian.net/forward.html">https://perl-team.pages.debian.net/forward.html</a></p>
+<p><strong>Install Perl Team packaging tools:</strong></p>
+<pre><code class="language-bash">sudo apt install pkg-perl-tools
+</code></pre>
+<p><strong>Create the file <code>debian/upstream/metadata</code> with the following content:</strong></p>
+<pre><code class="language-yaml">Name: &lt;PROJECT NAME&gt;
+Archive: GitHub
+Repository: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;.git
+Repository-Browse: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;
+Bug-Database: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;/issues
+Bug-Submit: https://github.com/&lt;AUTHOR&gt;/&lt;REPO&gt;/issues/new
+</code></pre>
+<p><strong>Create the file <code>~/.dpt.conf</code> with the following content:</strong></p>
+<pre><code class="language-text">DPT_GITHUB_ORGNAME=&lt;ORGANIZATION NAME&gt;
+DPT_GITHUB_OAUTH=&lt;PERSONAL ACCESS TOKEN&gt;
+DPT_GITHUB_BRANCH=pkg-debian-$(date +%s)
+</code></pre>
+<p>To forward the patch just run:</p>
+<pre><code class="language-bash">dpt forward debian/patches/&lt;PATCH FILE&gt;
+</code></pre>
+<h2 id="uploading-a-package">Uploading a package</h2>
+<p><strong>In your host run the following command inside the package directory:</strong></p>
+<pre><code class="language-bash">sbuild -s -d unstable -c sid-amd64-sbuild --source-only-changes
+</code></pre>
+<p><strong>Sign the package:</strong></p>
+<pre><code class="language-bash">debsign &lt;package&gt;_&lt;version&gt;_source.changes
+</code></pre>
+<p><strong>Upload the package:</strong></p>
+<pre><code class="language-bash">dput &lt;package&gt;_&lt;version&gt;_source.changes
+</code></pre>
+<h2 id="using-pdebuild">Using pdebuild</h2>
+<p>If we just want to use <code>pbuilder</code> without <code>sbuild</code> we first create the base:</p>
+<pre><code class="language-bash">sudo pbuilder create --mirror http://deb.debian.org/debian --distribution sid
+</code></pre>
+<p>In order to install packages inside the chroot we can use:</p>
+<pre><code class="language-bash">sudo pbuilder --login --save-after-login
+</code></pre>
+<p>To build a package, from its source directory run:</p>
+<pre><code class="language-bash">sudo pdebuild --use-pdebuild-internal
+</code></pre>
+<p>This command places the binary in <code>/var/cache/pbuilder/result</code>.</p>
+<p>Finally, to obtain the source-only files:</p>
+<pre><code class="language-bash">sudo pbuilder --build --source-only-changes &lt;package&gt;_&lt;version&gt;.dsc
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 <a href="https://twitter.com/aniol_marti">Aniol Martí</a>.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
